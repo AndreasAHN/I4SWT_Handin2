@@ -20,6 +20,8 @@ namespace AirTrafficMonitoring
 
         public int Z { get; set; }
 
+        public int Velocity { get; set; }
+
         public int CompassCourse { get; set; }
 
         public DateTime Timestamp { get; set; }
