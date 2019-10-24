@@ -6,48 +6,32 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    class TrackCalculator
+    public class TrackCalculator
     {
         private TrackCalculator calculator;
-        //public Track oldTrack { get; set; }
-        //public Track newTrack { get; set; }
-
 
         // structs for testing as i don't yet know how the Track works
-        public struct oldTrack
-        {
-            public static int x = 95000;
-            public static int y = 69547;
-            public static long time = 20191023142125299;
-        }
 
-        public struct newTrack
+        public void CalculateVelocity(Track oldTrack, Track newTrack)
         {
-            public static int x = 94871;
-            public static int y = 69517;
-            public static long time = 20191023142125988;
-        }
-
-        public void CalculateVelocity()
-        {
-            var distanceSquared = Math.Pow(oldTrack.x - newTrack.x, 2) + Math.Pow(oldTrack.y - newTrack.y, 2);
+            var distanceSquared = Math.Pow(oldTrack.X - newTrack.X, 2) + Math.Pow(oldTrack.Y - newTrack.Y, 2);
             var distance = Math.Sqrt(distanceSquared);
 
-            var timeDifference = oldTrack.time - newTrack.time;
+            var timeDifference = oldTrack.Timestamp - newTrack.Timestamp;
 
-            var velocity = distance / timeDifference;
+            var velocity = (timeDifference.Seconds/distance) * 3.6;
 
-            //Console.WriteLine($"Velocity: {velocity}");
+            Console.WriteLine($"Velocity: {velocity}");
 
         }
 
-        public void CalculateCompassCourse()
+        public void CalculateCompassCourse(Track oldTrack, Track newTrack)
         {
 
-            var angle = Math.Atan2(oldTrack.y - newTrack.y, oldTrack.x - newTrack.x);
+            var angle = Math.Atan2(oldTrack.Y - newTrack.Y, oldTrack.X - newTrack.X);
             var compassCourse = angle * 180 / Math.PI;
 
-            //Console.WriteLine($"Compass course: {compassCourse}");
+            Console.WriteLine($"Compass course: {compassCourse}");
         }
     }
 }
