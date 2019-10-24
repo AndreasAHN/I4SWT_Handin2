@@ -19,8 +19,8 @@ namespace AirTrafficMonitoring
 
         public TransponderReceiverClient(ITransponderReceiver receiver)
         {
-            _receiver = receiver;
-            _receiver.TransponderDataReady += HandleTransponderDataReady;
+            this._receiver = receiver;
+            this._receiver.TransponderDataReady += HandleTransponderDataReady;
         }
 
         private void HandleTransponderDataReady(object sender, RawTransponderDataEventArgs e)
