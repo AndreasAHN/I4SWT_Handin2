@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace AirTrafficMonitoring
 {
     // <summary>
-    // Track is a data class contaning all information of a track
-    // Track will not have any methods due to public properties
+    // Track is a data class containing all information of a track
+    // Track won't have any methods due to public properties
     // </summary>
     public class Track
     {
