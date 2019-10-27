@@ -10,28 +10,50 @@ namespace AirTrafficMonitoring
     {
         private TrackCalculator calculator;
 
-        // structs for testing as i don't yet know how the Track works
-
-        public void CalculateVelocity(Track oldTrack, Track newTrack)
+        public void TrackCalculate(Track track)
         {
-            var distanceSquared = Math.Pow(oldTrack.X - newTrack.X, 2) + Math.Pow(oldTrack.Y - newTrack.Y, 2);
-            var distance = Math.Sqrt(distanceSquared);
+            //track.Velocity = CalculateVelocity();
+            //track.CompassCourse = CalculateCompassCourse();
 
-            var timeDifference = oldTrack.Timestamp - newTrack.Timestamp;
-
-            var velocity = (timeDifference.Seconds/distance) * 3.6;
-
-            Console.WriteLine($"Velocity: {velocity}");
+            //List <Track> = TrackCalculator.calculate(List <Track> tracks);
 
         }
 
-        public void CalculateCompassCourse(Track oldTrack, Track newTrack)
+        // structs for testing as i don't yet know how the Track works
+
+        public int CalculateVelocity(Track newTrack, Track oldTrack)
+        {
+            var distanceSquared = Math.Pow(newTrack.X - oldTrack.X, 2) + Math.Pow(newTrack.Y - oldTrack.Y, 2);
+            var distance = Math.Sqrt(distanceSquared);
+
+            var timeDifference = (newTrack.Timestamp - oldTrack.Timestamp).Milliseconds;
+
+            var velocity = distance / timeDifference * 1000;
+
+            return (int) velocity;
+
+            //Console.WriteLine($"Velocity: {velocity}");
+
+        }
+
+
+
+
+
+        public int CalculateCompassCourse(Track newTrack, Track oldTrack)
         {
 
-            var angle = Math.Atan2(oldTrack.Y - newTrack.Y, oldTrack.X - newTrack.X);
-            var compassCourse = angle * 180 / Math.PI;
+            var angle = Math.Atan2(newTrack.Y - oldTrack.Y, newTrack.X - oldTrack.X);
+            var compassCourseAngle = angle * 180 / Math.PI;
 
-            Console.WriteLine($"Compass course: {compassCourse}");
+            if (compassCourseAngle < 0)
+            {
+                compassCourseAngle = compassCourseAngle + 360;
+            }
+
+            return (int) compassCourseAngle;
+
+            //Console.WriteLine($"Compass course: {compassCourse}");
         }
     }
 }
