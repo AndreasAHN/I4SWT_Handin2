@@ -41,7 +41,7 @@ namespace AirTrafficMonitoring
         }
 
         //metoder
-        public void setTracks(List<Track> bufTracks)
+        public void SetTracks(List<Track> bufTracks)
         {
             clearTracks();
 
