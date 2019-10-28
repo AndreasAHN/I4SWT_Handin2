@@ -25,24 +25,23 @@ namespace AirTrafficMonitoring
 
 
 
-        //1 - definde a delegate
+        //1 - define a delegate
+
         public delegate void AirSpaceChangedEventHandler(object source, EventArgs args);
 
         //2 - define an event based on that delegate
+
         public event AirSpaceChangedEventHandler AirspaceChanged;
 
         //3 - raise the event
+
         protected virtual void OnAirspaceChanged(Track ownTrack)
         {
-
-
-
-
 
         }
 
         //metoder
-        void setTracks(List<Track> bufTracks)
+        public void setTracks(List<Track> bufTracks)
         {
             clearTracks();
 
