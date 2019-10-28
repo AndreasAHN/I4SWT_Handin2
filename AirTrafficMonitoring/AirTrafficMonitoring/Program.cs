@@ -32,7 +32,6 @@ namespace AirTrafficMonitoring
 
         static void air_ThresholdReached(object sender, EventArgs e)//New airplains
         {
-            Console.WriteLine("Main event airspace change");
             screen.printTracks(airSpace.GetOwnTrack(), airSpace.GetTracks());
             condition.TooClose(airSpace.GetOwnTrack(), airSpace.GetTracks());
             
