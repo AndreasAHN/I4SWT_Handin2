@@ -36,25 +36,25 @@ namespace AirTrafficMonitoring
 
             if (bufTracks.Count != 0)
             {
-                ownTrack = bufTracks[0];
+                //ownTrack = bufTracks[0];
 
-                if (bufTracks.Count >= 1)
-                {
+                //if (bufTracks.Count >= 1)
+                //{
                     //funktion til sortering af tracks
-                    for (int i = 1; i < bufTracks.Count(); i++)
+                for (int i = 0; i < bufTracks.Count(); i++)
+                {
+                    //double vertical = 0;
+                    //double horizontal = 0;
+
+                    //vertical = Math.Sqrt((ownTrack.X - bufTracks[i].X) * (ownTrack.X - bufTracks[i].X) + (ownTrack.Y - bufTracks[i].Y) * (ownTrack.Y - bufTracks[i].Y));
+                    //horizontal = Math.Sqrt(ownTrack.Z - bufTracks[i].Z);
+
+                    if (((500 < bufTracks[i].Z) || (bufTracks[i].Z < 20000)) && (bufTracks[i].X < 80000) && (bufTracks[i].Y < 80000))
                     {
-                        double vertical = 0;
-                        double horizontal = 0;
-
-                        vertical = Math.Sqrt((ownTrack.X - bufTracks[i].X) * (ownTrack.X - bufTracks[i].X) + (ownTrack.Y - bufTracks[i].Y) * (ownTrack.Y - bufTracks[i].Y));
-                        horizontal = Math.Sqrt(ownTrack.Z - bufTracks[i].Z);
-
-                        if (((500 < vertical) || (vertical < 20000)) && (horizontal < 80000))
-                        {
-                            tracks.Add(bufTracks[i]);
-                        }
+                        tracks.Add(bufTracks[i]);
                     }
-                }   
+                }
+                //}   
 
                 //tracks = Program.trackCalculator.calculate(tracks); //Når Marie er done, tilføjes denne metode
 

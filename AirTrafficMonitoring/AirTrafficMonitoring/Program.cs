@@ -32,13 +32,16 @@ namespace AirTrafficMonitoring
 
         static void air_ThresholdReached(object sender, EventArgs e)//New airplains
         {
-            screen.printTracks(airSpace.GetOwnTrack(), airSpace.GetTracks());
-            condition.TooClose(airSpace.GetOwnTrack(), airSpace.GetTracks());
-            
-            if(condition.GetSeperation())
+            screen.printTracks(airSpace.GetTracks());
+            condition.TooClose(airSpace.GetTracks());
+
+            if (condition.GetSeperation())
             {
-                screen.printConflict(airSpace.GetOwnTrack(), condition.GetConflictAirplain(), condition.GetConflictDistanceVertical(), condition.GetConflictDistanceHorizontal());
-                fileWriter.WriteToLog(airSpace.GetOwnTrack(), condition.GetConflictAirplain());
+                for (int x = 0; x < condition.conflictTrack1.Count(); x++)
+                {
+                    screen.printConflict(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x], condition.GetConflictDistanceVertical()[x], condition.GetConflictDistanceHorizontal()[x]);
+                    fileWriter.WriteToLog(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x]);
+                }
             }
         }
     }

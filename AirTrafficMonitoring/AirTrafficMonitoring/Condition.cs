@@ -9,35 +9,49 @@ namespace AirTrafficMonitoring
     class Condition
     {
         public bool sepration = false;
-        public Track conflictTrack;
-        public int conflicDistanceVertical;
-        public int conflicDistacneHorizontal;
+        public List<Track> conflictTrack1 = new List<Track>();
+        public List<Track> conflictTrack2 = new List<Track>();
+        public List<int> conflicDistanceVertical = new List<int>();
+        public List<int> conflicDistacneHorizontal = new List<int>();
 
         public Condition()
         {
 
         }
 
-        public bool TooClose(Track ownTrack, List<Track> tracks )
+        public bool TooClose(List<Track> tracks )
         {
-            if (tracks.Count >= 1)
+            conflictTrack1.Clear();
+            conflictTrack2.Clear();
+            conflicDistanceVertical.Clear();
+            conflicDistacneHorizontal.Clear();
+
+            if (tracks.Count >= 2)
             {
                 sepration = false;
-                for (int i = 0; i < tracks.Count(); i++)
+                for (int x = 0; x < tracks.Count(); x++)
                 {
-                    double distanceVertical = 0;
-                    double distanceHorizontal = 0;
-
-                    distanceVertical = Math.Sqrt((ownTrack.X - tracks[i].X) * (ownTrack.X - tracks[i].X) + (ownTrack.Y - tracks[i].Y) * (ownTrack.Y - tracks[i].Y));
-                    distanceHorizontal = Math.Sqrt(ownTrack.Z - tracks[i].Z);
-
-                    if (distanceVertical < 5000 && distanceHorizontal < 300)
+                    Track bufTrack = tracks[x];
+                    
+                    for (int i = 0; i < tracks.Count(); i++)
                     {
-                        this.conflictTrack = tracks[i];
-                        this.conflicDistanceVertical = Convert.ToInt32(distanceVertical);
-                        this.conflicDistacneHorizontal = Convert.ToInt32(distanceHorizontal);
+                        if (i != x)
+                        {
+                            double distanceVertical = 0;
+                            double distanceHorizontal = 0;
 
-                        this.sepration = true;
+                            distanceVertical = Math.Sqrt((bufTrack.X - tracks[i].X) * (bufTrack.X - tracks[i].X) + (bufTrack.Y - tracks[i].Y) * (bufTrack.Y - tracks[i].Y));
+                            distanceHorizontal = Math.Sqrt(bufTrack.Z - tracks[i].Z);
+
+                            if (distanceVertical < 5000 && distanceHorizontal < 300)
+                            {
+                                this.conflictTrack1.Add(bufTrack);
+                                this.conflictTrack2.Add(tracks[i]);
+                                this.conflicDistanceVertical.Add(Convert.ToInt32(distanceVertical));
+                                this.conflicDistacneHorizontal.Add(Convert.ToInt32(distanceHorizontal));
+                                this.sepration = true;
+                            }
+                        }
                     }
                 }
             }
@@ -50,17 +64,22 @@ namespace AirTrafficMonitoring
             return sepration;
         }
 
-        public Track GetConflictAirplain()
+        public List<Track> GetConflictAirplain1()
         {
-            return conflictTrack;
+            return conflictTrack1;
         }
 
-        public int GetConflictDistanceVertical()
+        public List<Track> GetConflictAirplain2()
+        {
+            return conflictTrack2;
+        }
+
+        public List<int> GetConflictDistanceVertical()
         {
             return conflicDistanceVertical;
         }
 
-        public int GetConflictDistanceHorizontal()
+        public List<int> GetConflictDistanceHorizontal()
         {
             return conflicDistacneHorizontal;
         }

@@ -13,11 +13,11 @@ namespace AirTrafficMonitoring
 
         }
 
-        public void printTracks(Track ownTrack, List<Track> tracks)
+        public void printTracks(List<Track> tracks)
         {
             Console.Clear();
-            Console.WriteLine("Our track:{0} Cordinates: {1} , {2} , {3}  Speed: {4} Direction: {5} Time: {6}",
-                    ownTrack.Tag, ownTrack.X, ownTrack.Y, ownTrack.Z, ownTrack.Velocity, ownTrack.CompassCourse, ownTrack.Timestamp);
+            //Console.WriteLine("Our track:{0} Cordinates: {1} , {2} , {3}  Speed: {4} Direction: {5} Time: {6}",
+            //        ownTrack.Tag, ownTrack.X, ownTrack.Y, ownTrack.Z, ownTrack.Velocity, ownTrack.CompassCourse, ownTrack.Timestamp);
             Console.WriteLine("--------------------------------------------------------------------------------------------------");
 
             if (tracks.Count != 0)
