@@ -78,5 +78,10 @@ namespace AirTrafficMonitoring
             tracks.Clear();
         }
 
+        public Track GetOwnTrack()
+        {
+            return ownTrack;
+        }
+
     }
 }
