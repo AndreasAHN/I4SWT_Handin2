@@ -20,22 +20,25 @@ namespace AirTrafficMonitoring
 
         public bool TooClose(Track ownTrack, List<Track> tracks )
         {
-            sepration = false;
-            for(int i = 0 ; i<tracks.Count() ; i++)
+            if (tracks.Count != 0)
             {
-                int distanceVertical = 0;
-                int distanceHorizontal = 0;
-
-                distanceVertical = ((ownTrack.X - tracks[i].X) * (ownTrack.X - tracks[i].X) + (ownTrack.Y - tracks[i].Y) * (ownTrack.Y - tracks[i].Y));
-                distanceHorizontal = ownTrack.Z - tracks[i].Z;
-
-                if(distanceVertical < 5000 || distanceHorizontal < 300)
+                sepration = false;
+                for (int i = 0; i < (tracks.Count() - 1); i++)
                 {
-                    this.conflictTrack = tracks[i];
-                    this.conflicDistanceVertical = distanceVertical;
-                    this.conflicDistacneHorizontal = distanceHorizontal;
+                    int distanceVertical = 0;
+                    int distanceHorizontal = 0;
 
-                    this.sepration = true;
+                    distanceVertical = ((ownTrack.X - tracks[i].X) * (ownTrack.X - tracks[i].X) + (ownTrack.Y - tracks[i].Y) * (ownTrack.Y - tracks[i].Y));
+                    distanceHorizontal = ownTrack.Z - tracks[i].Z;
+
+                    if (distanceVertical < 5000 || distanceHorizontal < 300)
+                    {
+                        this.conflictTrack = tracks[i];
+                        this.conflicDistanceVertical = distanceVertical;
+                        this.conflicDistacneHorizontal = distanceHorizontal;
+
+                        this.sepration = true;
+                    }
                 }
             }
 

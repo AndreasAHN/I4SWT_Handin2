@@ -10,6 +10,7 @@ namespace AirTrafficMonitoring
 {
     class Program
     {
+        public static Airspace airSpace = new Airspace();
         public static TrackCalculator trackCalculator = new TrackCalculator();
         public static Condition condition = new Condition();
         public static FileWriter fileWriter = new FileWriter("AirLogger.txt");
@@ -21,8 +22,7 @@ namespace AirTrafficMonitoring
         {
             var transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
-            var airSpaceChange = new AirSpaceChange();
-            airSpaceChange.AirSpaceChanged += air_ThresholdReached;
+            airSpace.AirSpaceChanged += air_ThresholdReached;
 
             while (runner)
             {
@@ -32,27 +32,15 @@ namespace AirTrafficMonitoring
 
         static void air_ThresholdReached(object sender, EventArgs e)//New airplains
         {
-            List<Track> tracks = new List<Track>(); //airSpace.getTracks();
-            Track ownTrack = new Track(); //airSpace.getOwnTrack();
-            //tracks = trackCalculator.calculate(tracks);
-            screen.printTracks(tracks);
-            condition.TooClose(ownTrack, tracks);
+            Console.WriteLine("Main event airspace change");
+            screen.printTracks(airSpace.GetOwnTrack(), airSpace.GetTracks());
+            condition.TooClose(airSpace.GetOwnTrack(), airSpace.GetTracks());
             
             if(condition.GetSeperation())
             {
-                screen.printConflict(ownTrack, condition.GetConflictAirplain(), condition.GetConflictDistanceVertical(), condition.GetConflictDistanceHorizontal());
-                fileWriter.WriteToLog(ownTrack, condition.GetConflictAirplain());
+                screen.printConflict(airSpace.GetOwnTrack(), condition.GetConflictAirplain(), condition.GetConflictDistanceVertical(), condition.GetConflictDistanceHorizontal());
+                fileWriter.WriteToLog(airSpace.GetOwnTrack(), condition.GetConflictAirplain());
             }
-        }
-    }
-
-    class AirSpaceChange
-    {
-        public event EventHandler AirSpaceChanged;
-        protected virtual void AirTrafficController(EventArgs e)
-        {
-            EventHandler handler = AirSpaceChanged;
-            handler?.Invoke(this, e);
         }
     }
 }

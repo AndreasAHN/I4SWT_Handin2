@@ -21,6 +21,7 @@ namespace AirTrafficMonitoring
         {
             this._receiver = receiver;
             this._receiver.TransponderDataReady += HandleTransponderDataReady;
+            Console.WriteLine("Started transponder reciver");
         }
 
         private void HandleTransponderDataReady(object sender, RawTransponderDataEventArgs e)
@@ -45,6 +46,9 @@ namespace AirTrafficMonitoring
                 };
                 trackIndex++;
             }
+
+            Program.airSpace.SetTracks(Tracks.ToList());
+
             DataReceivedEvent?.Invoke(null, null);
         }
     }
