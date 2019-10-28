@@ -63,7 +63,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="FileWriter_test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screen_Test.cs" />
     <Compile Include="TrackCalculator_Test.cs" />
+    <Compile Include="Condition_Test.cs" />
     <Compile Include="TransponderReceiverClient_Track_Test.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    class Airspace
+    public class Airspace
     {
        private static Mutex mutex = new Mutex();
 

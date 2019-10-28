@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    class Screen
+    public class Screen
     {
         public Screen()
         {

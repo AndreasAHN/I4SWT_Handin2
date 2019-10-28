@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    class Condition
+    public class Condition
     {
         public bool sepration = false;
         public List<Track> conflictTrack1 = new List<Track>();
