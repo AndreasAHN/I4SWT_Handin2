@@ -15,27 +15,38 @@ namespace AirTrafficMonitoring
         {
             List<Track> buffTrack = new List<Track>();
 
-            for (int i = 0; i < track.Count; i++)
+            if (track.Count() >= 1)
             {
-                for (int x = 0; x < _oldTrack.Count; x++)
+                for (int i = 0; i < track.Count; i++)
                 {
-                    if (_oldTrack[x].Tag == track[i].Tag)
-                    {
-                        buffTrack.Add(track[i]);
+                    bool found = false;
 
-                        buffTrack[buffTrack.Count-1].Velocity = CalculateVelocity(track[i], _oldTrack[x]);
-                        buffTrack[buffTrack.Count-1].CompassCourse = CalculateCompassCourse(track[i], _oldTrack[x]);
-                    }
-                    else if (_oldTrack.Count > x)
+                    for (int x = 0; x < _oldTrack.Count; x++)
                     {
-                        buffTrack.Add(track[i]);
+                        if (_oldTrack[x].Tag == track[i].Tag)
+                        {
+                            buffTrack.Add(track[i]);
+                            buffTrack[buffTrack.Count - 1].Velocity = CalculateVelocity(track[i], _oldTrack[x]);
+                            buffTrack[buffTrack.Count - 1].CompassCourse = CalculateCompassCourse(track[i], _oldTrack[x]);
+                            found = true;
+                        }
+                        else if ((x < _oldTrack.Count) && (found == false))
+                        {
+                            buffTrack.Add(track[i]);
+                        }
                     }
                 }
+
+                //_oldTrack.Clear();
+                _oldTrack = track;
+
+                return buffTrack;
             }
-
-            _oldTrack = track;
-
-            return buffTrack;
+            else
+            {
+                _oldTrack = track;
+                return track;
+            }
 
         }
 
