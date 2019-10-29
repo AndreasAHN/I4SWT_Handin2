@@ -31,6 +31,7 @@ namespace AirTrafficMonitoring
 
         public void SetTracks(List<Track> bufTracks)
         {
+            Console.WriteLine("Airplains found" + bufTracks.Count());
             clearTracks();
 
             if (bufTracks.Count != 0)
@@ -43,7 +44,10 @@ namespace AirTrafficMonitoring
                     }
                 }
 
-                //tracks = Program.trackCalculator.calculate(tracks); //Når Marie er done, tilføjes denne metode
+                List<Track> buf = new List<Track>();
+                buf = Program.trackCalculator.TrackCalculate(tracks); //Når Marie er done, tilføjes denne metode
+                //tracks.Clear();
+                tracks = buf;
 
                 AirTrafficController(EventArgs.Empty);
             }
