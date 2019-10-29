@@ -15,7 +15,7 @@ namespace AirTrafficMonitoring
 
         public void WriteToLog(Track track1, Track track2)
         {
-            string toWrite = $"{DateTime.Now} - {track1.Tag} - {track2.Tag}";
+            string toWrite = $"{DateTime.Now} - {track1.Tag} - {track2.Tag}\n";
             FileStream fs = new FileStream(_filename, FileMode.Append);
             fs.Write(Encoding.ASCII.GetBytes(toWrite), 0, toWrite.Length);
             fs.Close();
