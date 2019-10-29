@@ -33,6 +33,8 @@ namespace AirTrafficMonitoring
                 }
             }
 
+            _oldTrack = track;
+
             return buffTrack;
 
         }
