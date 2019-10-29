@@ -21,21 +21,18 @@ namespace AirTrafficMonitoring
         {
             this._receiver = receiver;
             this._receiver.TransponderDataReady += HandleTransponderDataReady;
-            Console.WriteLine("Started transponder reciver");
+            Console.WriteLine("Started transponder receiver");
         }
 
         private void HandleTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             Tracks = new Track[e.TransponderData.Count];
-
-            string[] tokens;
             char[] separator = {';'};
-
             int trackIndex = 0;
 
             foreach (var data in e.TransponderData)
             {
-                tokens = data.Split(separator);
+                string[] tokens = data.Split(separator);
                 Tracks[trackIndex] = new Track()
                 {
                     Tag = tokens[0],
@@ -44,6 +41,7 @@ namespace AirTrafficMonitoring
                     Z = int.Parse(tokens[3]),
                     Timestamp = DateTime.ParseExact(tokens[4], "yyyyMMddHHmmssfff", null)
                 };
+
                 trackIndex++;
             }
 
