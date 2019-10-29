@@ -9,17 +9,34 @@ namespace AirTrafficMonitoring
     public class TrackCalculator
     {
         private TrackCalculator calculator;
+        private List<Track> _oldTrack = new List<Track>();
 
-        public void TrackCalculate(Track track)
+        public List<Track> TrackCalculate(List<Track> track)
         {
-            //track.Velocity = CalculateVelocity();
-            //track.CompassCourse = CalculateCompassCourse();
+            List<Track> buffTrack = new List<Track>();
 
-            //List <Track> = TrackCalculator.calculate(List <Track> tracks);
+            for (int i = 0; i < track.Count; i++)
+            {
+                for (int x = 0; x < _oldTrack.Count; x++)
+                {
+                    if (_oldTrack[x].Tag == track[i].Tag)
+                    {
+                        buffTrack.Add(track[i]);
+
+                        buffTrack[buffTrack.Count-1].Velocity = CalculateVelocity(track[i], _oldTrack[x]);
+                        buffTrack[buffTrack.Count-1].CompassCourse = CalculateCompassCourse(track[i], _oldTrack[x]);
+                    }
+                    else if (_oldTrack.Count > x)
+                    {
+                        buffTrack.Add(track[i]);
+                    }
+                }
+            }
+
+            return buffTrack;
 
         }
 
-        // structs for testing as i don't yet know how the Track works
 
         public int CalculateVelocity(Track newTrack, Track oldTrack)
         {
@@ -42,7 +59,6 @@ namespace AirTrafficMonitoring
 
         public int CalculateCompassCourse(Track newTrack, Track oldTrack)
         {
-
             var angle = Math.Atan2(newTrack.Y - oldTrack.Y, newTrack.X - oldTrack.X);
             var compassCourseAngle = angle * 180 / Math.PI;
 
