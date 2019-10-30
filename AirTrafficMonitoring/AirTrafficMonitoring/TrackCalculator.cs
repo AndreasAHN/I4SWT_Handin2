@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    public class TrackCalculator
+    public class TrackCalculator : ITrackCalculator
     {
         private List<Track> _oldTrack;
 
