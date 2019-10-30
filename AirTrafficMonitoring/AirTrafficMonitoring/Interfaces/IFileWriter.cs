@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    interface IFileWriter
+    public interface IFileWriter
     {
-        void WriteToLog(Track track1, Track track2);
+        void WriteToFile(Track track1, Track track2);
     }
 }

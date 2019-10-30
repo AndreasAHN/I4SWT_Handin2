@@ -10,20 +10,31 @@ namespace AirTrafficMonitoring
 {
     class Program
     {
-        public static Airspace airSpace = new Airspace();
-        public static Condition condition = new Condition();
-        public static Screen screen = new Screen();
+        private static ICondition _condition;
+        private static IFileWriter _fileWriter;
+        private static Airspace _airspace;
+        private static Screen _screen;
+
+
 
         public static bool runner = true; //Kan sætte til false, fra resten af programet, for at standse koden.
-
         static void Main(string[] args)
         {
+            // TransponderReceiverClient
             var transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
-            airSpace.AirSpaceChanged += air_ThresholdReached;
 
-            transponderReceiverClient.DataReadyEvent += airSpace.HandleDataReadyEvent;
+            // Condition
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _condition = new Condition(_fileWriter);
 
+            // Airspace            
+            _airspace = new Airspace();
+            transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
+            _airspace.AirSpaceChanged += air_ThresholdReached;
+
+            // Screen
+            _screen = new Screen();
 
 
             while (runner)
@@ -34,14 +45,14 @@ namespace AirTrafficMonitoring
 
         static void air_ThresholdReached(object sender, EventArgs e)//New airplains event
         {
-            screen.printTracks(airSpace.GetTracks());
-            condition.TooClose(airSpace.GetTracks());
+            _screen.printTracks(_airspace.GetTracks());
+            _condition.TooClose(_airspace.GetTracks());
 
-            if (condition.GetSeperation())
+            if (_condition.GetSeperation())
             {
-                for (int x = 0; x < condition.conflictTrack1.Count(); x++)
+                for (int x = 0; x < _condition.GetConflictAirplain1().Count(); x++)
                 {
-                    screen.printConflict(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x]);
+                    _screen.printConflict(_condition.GetConflictAirplain1()[x], _condition.GetConflictAirplain2()[x]);
                 }
             }
         }

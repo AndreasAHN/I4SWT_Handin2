@@ -15,7 +15,7 @@ namespace AirTrafficMonitoring_Tester
     [TestFixture]
     public class FileWriter_test
     {
-        private FileWriter _uut;
+        private SeperationConditionLogger _uut;
         private string _filename;
 
 
@@ -23,7 +23,7 @@ namespace AirTrafficMonitoring_Tester
         public void SetUp()
         {
             _filename = "FileWriteTest.txt";
-            _uut = new FileWriter(_filename);
+            _uut = new SeperationConditionLogger(_filename);
         }
 
         [Test]
