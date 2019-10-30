@@ -50,6 +50,7 @@
     <Compile Include="Condition.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
+    <Compile Include="Interfaces\ICondition.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Interfaces\IScreen.cs" />
     <Compile Include="Interfaces\ITrack.cs" />
