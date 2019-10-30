@@ -8,12 +8,14 @@ namespace AirTrafficMonitoring
 {
     public class Condition
     {
+        public FileWriter fileWriter;
         public bool sepration = false;
         public List<Track> conflictTrack1;
         public List<Track> conflictTrack2;
 
         public Condition()
         {
+            fileWriter = = new FileWriter("AirLogger.txt");
             conflictTrack1 = new List<Track>();
             conflictTrack2 = new List<Track>();
         }
@@ -59,7 +61,7 @@ namespace AirTrafficMonitoring
                                 {
                                     this.conflictTrack1.Add(bufTrack);
                                     this.conflictTrack2.Add(tracks[i]);
-                                    Program.fileWriter.WriteToLog(bufTrack, tracks[i]);
+                                    fileWriter.WriteToLog(bufTrack, tracks[i]);
                                 }
 
                                 this.sepration = true;
