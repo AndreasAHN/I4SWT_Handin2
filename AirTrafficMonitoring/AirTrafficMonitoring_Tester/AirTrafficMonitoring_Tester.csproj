@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airspace_Test.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="FileWriter_test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

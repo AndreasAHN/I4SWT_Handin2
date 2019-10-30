@@ -49,6 +49,10 @@
     <Compile Include="Airspace.cs" />
     <Compile Include="Condition.cs" />
     <Compile Include="FileWriter.cs" />
+    <Compile Include="IAirspace.cs" />
+    <Compile Include="IFileWriter.cs" />
+    <Compile Include="IScreen.cs" />
+    <Compile Include="ITrack.cs" />
     <Compile Include="ITrackCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
