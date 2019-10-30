@@ -38,7 +38,7 @@ namespace AirTrafficMonitoring_Tester
                 Tag = "Tag2"
             };
 
-            _uut.WriteToLog(t1, t2);
+            _uut.WriteToFile(t1, t2);
             Assert.IsTrue(File.Exists(_filename));
             File.Delete(_filename);
         }
@@ -65,7 +65,7 @@ namespace AirTrafficMonitoring_Tester
 
 
             // Write to file
-            _uut.WriteToLog(t1, t2);
+            _uut.WriteToFile(t1, t2);
             
             // read line from file
             StreamReader sr = new StreamReader(_filename);
