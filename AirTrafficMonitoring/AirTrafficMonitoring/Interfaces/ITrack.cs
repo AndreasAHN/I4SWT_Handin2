@@ -8,7 +8,7 @@ namespace AirTrafficMonitoring
 {
     interface ITrack
     {
-        string Tag { get; set; };
+        string Tag { get; set; }
 
         int X { get; set; }
 
