@@ -9,11 +9,16 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoring
 {
+    public class DataReceivedEventArgs : EventArgs
+    {
+        public List<Track> data { get; set; }
+    }
+
     public class TransponderReceiverClient
     {
         private readonly ITransponderReceiver _receiver;
 
-        public event EventHandler DataReceivedEvent;
+        public event EventHandler<DataReceivedEventArgs> DataReceivedEvent;
 
         public Track[] Tracks { get; private set; }
 
@@ -44,9 +49,10 @@ namespace AirTrafficMonitoring
                 trackIndex++;
             }
 
-            Program.airSpace.SetTracks(Tracks.ToList());
-
-            DataReceivedEvent?.Invoke(null, null);
+            DataReceivedEvent?.Invoke(null, new DataReceivedEventArgs
+            {
+                data = Tracks.ToList()
+            });
         }
     }
 }

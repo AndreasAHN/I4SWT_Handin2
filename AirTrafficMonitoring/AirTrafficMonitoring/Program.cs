@@ -23,6 +23,10 @@ namespace AirTrafficMonitoring
             var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
             airSpace.AirSpaceChanged += air_ThresholdReached;
 
+            transponderReceiverClient.DataReceivedEvent += airSpace.HandleDataReadyEvent;
+
+
+
             while (runner)
             {
                 Thread.Sleep(1000);

@@ -28,9 +28,11 @@ namespace AirTrafficMonitoring
         }
 
 
-        public void SetTracks(List<Track> bufTracks)
+        public void HandleDataReadyEvent(object sender, DataReceivedEventArgs e)
         {
             clearTracks();
+
+            List<Track> bufTracks = e.data;
 
             if (bufTracks.Count != 0)
             {
