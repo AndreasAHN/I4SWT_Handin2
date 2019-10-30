@@ -12,7 +12,6 @@ namespace AirTrafficMonitoring
     {
         public static Airspace airSpace = new Airspace();
         public static Condition condition = new Condition();
-        public static FileWriter fileWriter = new FileWriter("AirLogger.txt");
         public static Screen screen = new Screen();
 
         public static bool runner = true; //Kan sætte til false, fra resten af programet, for at standse koden.
@@ -22,6 +21,10 @@ namespace AirTrafficMonitoring
             var transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
             airSpace.AirSpaceChanged += air_ThresholdReached;
+
+            transponderReceiverClient.DataReceivedEvent += airSpace.HandleDataReadyEvent;
+
+
 
             while (runner)
             {
