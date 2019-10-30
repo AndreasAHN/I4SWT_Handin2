@@ -8,10 +8,17 @@ namespace AirTrafficMonitoring
 {
     public class TrackCalculator : ITrackCalculator
     {
+        private readonly ITrackCalculator _calculator;
         private List<Track> _oldTrack;
 
         public TrackCalculator()
         {
+            _oldTrack = new List<Track>();
+        }
+
+        public TrackCalculator(ITrackCalculator calculator)
+        {
+            this._calculator = calculator;
             _oldTrack = new List<Track>();
         }
 

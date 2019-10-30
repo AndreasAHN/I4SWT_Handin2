@@ -16,18 +16,18 @@ namespace AirTrafficMonitoring
         public void printTracks(List<Track> tracks)
         {
             Console.Clear();
-            Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------");
 
             if (tracks.Count != 0)
             {
                 for (int i = 0; i < tracks.Count; i++)
                 {
-                    Console.WriteLine("{0}: Track: {1} Cordinates: {2} , {3} , {4}  Speed: {5} Direction: {6} Time: {7}",
+                    Console.WriteLine("{0}:\tTag: {1}\tCoordinates: ({2}, {3}, {4})\tSpeed: {5}\tBearing: {6}\tTime: {7}",
                         i, tracks[i].Tag, tracks[i].X, tracks[i].Y, tracks[i].Z, tracks[i].Velocity, tracks[i].CompassCourse, tracks[i].Timestamp);
                 }
             }
 
-            Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------");
         }
 
         public void printConflict(Track conflictTrack1, Track conflictTrack2)
