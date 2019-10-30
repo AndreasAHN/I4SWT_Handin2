@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Airspace.cs" />
     <Compile Include="Condition.cs" />
+    <Compile Include="DataReceivedEventArgs.cs" />
     <Compile Include="FileWriter.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
     <Compile Include="Interfaces\ICondition.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Interfaces\IScreen.cs" />
     <Compile Include="Interfaces\ITrack.cs" />
     <Compile Include="Interfaces\ITrackCalculator.cs" />
+    <Compile Include="Interfaces\ITransponderReceiverClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen.cs" />
