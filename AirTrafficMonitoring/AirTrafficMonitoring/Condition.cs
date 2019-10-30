@@ -15,7 +15,7 @@ namespace AirTrafficMonitoring
 
         public Condition()
         {
-            fileWriter = = new FileWriter("AirLogger.txt");
+            fileWriter = new FileWriter("AirLogger.txt");
             conflictTrack1 = new List<Track>();
             conflictTrack2 = new List<Track>();
         }
