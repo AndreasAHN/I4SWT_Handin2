@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    public class Condition
+    public class Condition : ICondition
     {
-        public FileWriter fileWriter;
+        private IFileWriter _fileWriter;
         public bool sepration = false;
         public List<Track> conflictTrack1;
         public List<Track> conflictTrack2;
 
-        public Condition()
+        public Condition(IFileWriter fileWriter)
         {
-            fileWriter = new FileWriter("AirLogger.txt");
+            _fileWriter = fileWriter;
             conflictTrack1 = new List<Track>();
             conflictTrack2 = new List<Track>();
         }
@@ -61,7 +61,7 @@ namespace AirTrafficMonitoring
                                 {
                                     this.conflictTrack1.Add(bufTrack);
                                     this.conflictTrack2.Add(tracks[i]);
-                                    fileWriter.WriteToLog(bufTrack, tracks[i]);
+                                    _fileWriter.WriteToFile(bufTrack, tracks[i]);
                                 }
 
                                 this.sepration = true;

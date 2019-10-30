@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    public interface IFileWriter
+    public interface ITransponderReceiverClient
     {
-        void WriteToFile(Track track1, Track track2);
+        event EventHandler<DataReceivedEventArgs> DataReadyEvent;
     }
 }
