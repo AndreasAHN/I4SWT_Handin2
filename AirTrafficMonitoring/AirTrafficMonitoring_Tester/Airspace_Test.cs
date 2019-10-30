@@ -51,10 +51,16 @@ namespace AirTrafficMonitoring_Tester
         }
 
         [Test]
-        public void 
+        public void GetTracks()
+        {
+
+        }
 
         [Test]
-        public void
+        public void CLearTracks()
+        {
+
+        }
 
 
         
