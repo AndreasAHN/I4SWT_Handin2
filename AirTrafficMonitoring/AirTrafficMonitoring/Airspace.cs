@@ -9,9 +9,8 @@ namespace AirTrafficMonitoring
 {
     public class Airspace
     {
-        private static List<Track> tracks;
-
-        public static TrackCalculator trackCalculator;
+        private List<Track> tracks;
+        private TrackCalculator trackCalculator;
 
         public Airspace()
         {
