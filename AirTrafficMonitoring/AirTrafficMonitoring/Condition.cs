@@ -44,7 +44,7 @@ namespace AirTrafficMonitoring
                             distanceVertical = Math.Sqrt((bufTrack.X - tracks[i].X) * (bufTrack.X - tracks[i].X) + (bufTrack.Y - tracks[i].Y) * (bufTrack.Y - tracks[i].Y));
                             distanceHorizontal = Math.Sqrt(bufTrack.Z - tracks[i].Z);
 
-                            if (distanceVertical < 5000 && distanceHorizontal < 300)
+                            if (distanceVertical <= 5000 && distanceHorizontal <= 300)
                             {
                                 bool exist = false;
                                 for (int c = 0; c < bufConflictTrack1.Count(); c++)
