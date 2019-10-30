@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    interface IAirspace
+    public interface IAirspace
     {
         void HandleDataReadyEvent(object sender, DataReceivedEventArgs e);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitoring
 {
-    public class Airspace
+    public class Airspace : IAirspace
     {
         private List<Track> tracks;
         private TrackCalculator trackCalculator;
@@ -18,13 +18,13 @@ namespace AirTrafficMonitoring
             trackCalculator = new TrackCalculator();
         }
 
-
         public event EventHandler AirSpaceChanged;
-        protected virtual void AirTrafficController(EventArgs e)//Threshold
+        protected virtual void AirTrafficController(EventArgs e)
         {
             EventHandler handler = AirSpaceChanged;
             handler?.Invoke(this, e);
         }
+
 
 
         public void HandleDataReadyEvent(object sender, DataReceivedEventArgs e)
@@ -57,7 +57,7 @@ namespace AirTrafficMonitoring
         }
 
 
-        private void clearTracks()
+        public void clearTracks()
         {
             tracks.Clear();
         }
