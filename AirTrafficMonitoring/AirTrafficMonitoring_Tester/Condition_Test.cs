@@ -36,8 +36,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -84,8 +84,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -108,8 +108,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -132,8 +132,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -156,8 +156,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -180,8 +180,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -205,8 +205,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
@@ -229,8 +229,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(_testData[1], conflictAirplain1[0]);
-            Assert.AreEqual(_testData[2], conflictAirplain2[0]);
+            Assert.AreEqual(_testData[0], conflictAirplain1[0]);
+            Assert.AreEqual(_testData[1], conflictAirplain2[0]);
 
             //for (int i = 0; i < conflictAirplain1.Count(); i++)
             //{
