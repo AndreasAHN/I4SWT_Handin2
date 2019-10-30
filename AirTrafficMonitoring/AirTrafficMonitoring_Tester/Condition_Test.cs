@@ -233,9 +233,18 @@ namespace AirTrafficMonitoring_Tester
 
         public void Test_SeperationNoFound()
         {
+            _testData.Add(new Track { Tag = "GPJ740", X = 10000, Y = 10000, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 20000, Y = 20000, Z = 5000, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 30000, Y = 30000, Z = 7500, Timestamp = DateTime.Now });
+
             IFileWriter _fileWriter;
             _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
+
+            Assert.IsFalse(condition.TooClose(_testData));
+            Assert.IsFalse(condition.GetSeperation());
+
+            File.Delete("AirplaneSeperations.txt");
         }
     }
 }
