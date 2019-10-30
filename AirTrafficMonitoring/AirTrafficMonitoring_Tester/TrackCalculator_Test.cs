@@ -33,7 +33,7 @@ namespace AirTrafficMonitoring_Tester
 
             _testTracksOld.Add(new Track { Tag = "JYG338", X = 5258, Y = 57189, Z = 5000, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
             _testTracksOld.Add(new Track { Tag = "GVC241", X = 38594, Y = 77966, Z = 10900, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
-            _testTracksOld.Add(new Track { Tag = "WIA512",X = 17357, Y = 24364, Z = 2100, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
+            _testTracksOld.Add(new Track { Tag = "WIA512", X = 17357, Y = 24364, Z = 2100, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
 
             _testTracksNew.Add(new Track { Tag = "JYG338", X = 5387, Y = 57076, Z = 5000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
             _testTracksNew.Add(new Track { Tag = "GVC241", X = 38794, Y = 78066, Z = 10800, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
@@ -48,28 +48,28 @@ namespace AirTrafficMonitoring_Tester
 
         }
 
+        [Test]
+        public void Test_TrackCalculate()
+        {
+            var test0 = _uut.TrackCalculate(_testTracksOld);
+            var test1 = _uut.TrackCalculate(_testTracksNew);
 
+            var resTrack = new List<Track>();
+            resTrack.Add(new Track { Tag = "JYG338", X = 5387, Y = 57076, Z = 5000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 318, Velocity = 249 });
+            resTrack.Add(new Track { Tag = "GVC241", X = 38794, Y = 78066, Z = 10800, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 26, Velocity = 325 }); 
+            resTrack.Add(new Track { Tag = "WIA512", X = 18357, Y = 25364, Z = 2000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 45, Velocity = 2055 });
 
-        //[Test]
-        //public void Test_TrackCalculate()
-        //{
-        //    foreach (var v in _testTracks)
-        //    {
-        //        var calc = _uut.TrackCalculate(_testTracks);
-        //    }
-        //    var test0 = _uut.TrackCalculate(_testTracks);
+            //Console.WriteLine("Actual:   " + test1[1].X + test1[1].Y + test1[1].Z + test1[1].Velocity + test1[1].CompassCourse + test1[1].Timestamp);
+            //Console.WriteLine("Expected: " + resTrack[1].X + resTrack[1].Y + resTrack[1].Z + resTrack[1].Velocity + resTrack[1].CompassCourse + resTrack[1].Timestamp);
 
-        //    var resTrack = new List<Track>();
-        //    resTrack.Add(new Track { Tag = "JYG338", X = 5258, Y = 57189, Z = 5000, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
-        //    resTrack.Add(new Track { Tag = "GVC241", X = 38594, Y = 77966, Z = 10900, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 325, Velocity = 26 }); 
-        //    resTrack.Add(new Track { Tag = "WIA512", X = 17357, Y = 24364, Z = 2100, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 2055, Velocity = 45 });
+            Assert.AreEqual(resTrack[0].CompassCourse, test1[0].CompassCourse);
+            Assert.AreEqual(resTrack[0].Velocity, test1[0].Velocity);
+            Assert.AreEqual(resTrack[1].CompassCourse, test1[1].CompassCourse);
+            Assert.AreEqual(resTrack[1].Velocity, test1[1].Velocity);
+            Assert.AreEqual(resTrack[2].CompassCourse, test1[2].CompassCourse);
+            Assert.AreEqual(resTrack[2].Velocity, test1[2].Velocity);
 
-        //    Console.WriteLine("Actual:   (" + test0[1].X + ", " + test0[1].Y + "). Vel: " + test0[1].Velocity + ". Compass: " + test0[1].CompassCourse);
-        //    Console.WriteLine("Expected: (" + resTrack[1].X + ", " + resTrack[1].Y + "). Vel: " + resTrack[1].Velocity + ". Compass: " + resTrack[1].CompassCourse);
-
-        //    Assert.AreEqual(resTrack[1], test0[1]);
-
-        //}
+        }
 
         [Test]
         public void Test_CalculateVelocity()
