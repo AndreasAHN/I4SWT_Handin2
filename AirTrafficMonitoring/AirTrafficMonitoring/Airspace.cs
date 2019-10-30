@@ -10,12 +10,12 @@ namespace AirTrafficMonitoring
     public class Airspace : IAirspace
     {
         private List<Track> tracks;
-        private TrackCalculator trackCalculator;
+        private ITrackCalculator _trackCalculator;
 
-        public Airspace()
+        public Airspace(ITrackCalculator trackCalculator)
         {
             tracks = new List<Track>();
-            trackCalculator = new TrackCalculator();
+            _trackCalculator = trackCalculator;
         }
 
         public event EventHandler AirSpaceChanged;
@@ -43,7 +43,7 @@ namespace AirTrafficMonitoring
                     }
                 }
 
-                tracks = trackCalculator.TrackCalculate(tracks).ToList();
+                tracks = _trackCalculator.TrackCalculate(tracks).ToList();
 
                 AirTrafficController(EventArgs.Empty);
             }

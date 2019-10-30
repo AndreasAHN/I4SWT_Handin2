@@ -12,7 +12,8 @@ namespace AirTrafficMonitoring
     {
         private static ICondition _condition;
         private static IFileWriter _fileWriter;
-        private static Airspace _airspace;
+        private static IAirspace _airspace;
+        private static ITrackCalculator _trackCalculator;
         private static Screen _screen;
 
 
@@ -28,8 +29,9 @@ namespace AirTrafficMonitoring
             _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
             _condition = new Condition(_fileWriter);
 
-            // Airspace            
-            _airspace = new Airspace();
+            // Airspace
+            _trackCalculator = new TrackCalculator();
+            _airspace = new Airspace(_trackCalculator);
             transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
             _airspace.AirSpaceChanged += air_ThresholdReached;
 
