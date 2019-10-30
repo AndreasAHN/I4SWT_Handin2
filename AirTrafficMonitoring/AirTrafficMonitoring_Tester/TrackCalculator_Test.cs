@@ -49,17 +49,17 @@ namespace AirTrafficMonitoring_Tester
 
 
 
-        //[Test]
-        //public void Test_TrackCalculate()
-        //{
-        //    var test0 = _uut.TrackCalculate(_testTracksOld);
-        //    Track resTrack1 = new Track { Tag = "JYG338", X = 5258, Y = 57189, Z = 5000, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 };
-        //    Assert.AreEqual(resTrack1, test0[0]);
+        [Test]
+        public void Test_TrackCalculate()
+        {
+            var test0 = _uut.TrackCalculate(_testTracksOld);
+            Track resTrack1 = new Track { Tag = "JYG338", X = 5258, Y = 57189, Z = 5000, Timestamp = DateTime.ParseExact("20191024155401709", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 };
+            Assert.AreEqual(resTrack1, test0[0]);
 
-        //    var test1 = _uut.TrackCalculate(_testTracksNew);
-        //    Track resTrack2 = new Track { Tag = "JYG338", X = 5387, Y = 57076, Z = 5000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 249, Velocity = 318};
-        //    Assert.AreEqual(resTrack2, test1[0]);
-        //}
+            var test1 = _uut.TrackCalculate(_testTracksNew);
+            Track resTrack2 = new Track { Tag = "JYG338", X = 5387, Y = 57076, Z = 5000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 249, Velocity = 318};
+            Assert.AreEqual(resTrack2, test1[0]);
+        }
 
         [Test]
         public void Test_CalculateVelocity()
