@@ -37,7 +37,7 @@ namespace AirTrafficMonitoring
             {
                 for (int i = 0; i < bufTracks.Count(); i++)
                 {
-                    if (((500 < bufTracks[i].Z) || (bufTracks[i].Z < 20000)) && (bufTracks[i].X < 80000) && (bufTracks[i].Y < 80000))
+                    if (((500 <= bufTracks[i].Z) && (bufTracks[i].Z <= 20000)) && (bufTracks[i].X <= 80000) && (bufTracks[i].Y <= 80000))
                     {
                         tracks.Add(bufTracks[i]);
                     }
