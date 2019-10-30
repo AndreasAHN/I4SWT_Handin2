@@ -43,18 +43,24 @@ namespace AirTrafficMonitoring_Tester
 
 
 
-        //[Test]
-        //public void Test_OutOfBounds()//et fly der ikke bevæger sig inden for Airspace´s rammer
-        //{
-        //    var track = _uut.Tracks;
+        [Test]
+        public void Test_OutOfBounds()//et fly der ikke bevæger sig inden for Airspace´s rammer
+        {
+            var track = _uut.Tracks;
            
-        //}
+        }
 
-        //[Test]
-        //public void 
+        [Test]
+        public void GetTracks()
+        {
 
-        //[Test]
-        //public void
+        }
+
+        [Test]
+        public void CLearTracks()
+        {
+
+        }
 
 
         
