@@ -28,13 +28,12 @@ namespace AirTrafficMonitoring
             }
 
             Console.WriteLine("--------------------------------------------------------------------------------------------------");
-
         }
 
-        public void printConflict(Track ownTrack, Track conflictTrack, int vertical, int horizontal)
+        public void printConflict(Track conflictTrack1, Track conflictTrack2)
         {
-            Console.WriteLine("\n" + "!WARNING-SEPERATION! {0} and {1} are too close, distance vertical: {2} and horizontal {3}", 
-                ownTrack.Tag, conflictTrack.Tag, vertical, horizontal);
+            Console.WriteLine("\n" + "!WARNING-SEPERATION! {0} and {1}, at: {2}",
+                conflictTrack1.Tag, conflictTrack2.Tag, conflictTrack1.Timestamp);
         }
     }
 }

@@ -9,15 +9,14 @@ namespace AirTrafficMonitoring
 {
     public class Airspace
     {
-       private static Mutex mutex = new Mutex();
+        private static List<Track> tracks;
 
-       private static List<Track> tracks = new List<Track>();
-          
-       private static Track ownTrack;
+        public static TrackCalculator trackCalculator;
 
         public Airspace()
         {
-
+            tracks = new List<Track>();
+            trackCalculator = new TrackCalculator();
         }
 
 
@@ -31,7 +30,6 @@ namespace AirTrafficMonitoring
 
         public void SetTracks(List<Track> bufTracks)
         {
-            Console.WriteLine("Airplains found" + bufTracks.Count());
             clearTracks();
 
             if (bufTracks.Count != 0)
@@ -44,10 +42,7 @@ namespace AirTrafficMonitoring
                     }
                 }
 
-                List<Track> buf = new List<Track>();
-                buf = Program.trackCalculator.TrackCalculate(tracks); //Når Marie er done, tilføjes denne metode
-                //tracks.Clear();
-                tracks = buf;
+                tracks = trackCalculator.TrackCalculate(tracks).ToList();
 
                 AirTrafficController(EventArgs.Empty);
             }
@@ -65,11 +60,5 @@ namespace AirTrafficMonitoring
         {
             tracks.Clear();
         }
-
-        public Track GetOwnTrack()
-        {
-            return ownTrack;
-        }
-
     }
 }

@@ -26,7 +26,7 @@ namespace AirTrafficMonitoring_Tester
 
 
         [Test]
-        public void Test_SeperationFound()
+        public void Test_PrintTracks()
         {
             Screen screen = new Screen();
 
@@ -35,8 +35,9 @@ namespace AirTrafficMonitoring_Tester
             //StringAssert.Contains("WIA512", track[2].Tag);
         }
 
-        public void Test_SeperationNoFound()
+        public void Test_PrintConflict()
         {
-            Condition condition = new Condition();
+            Screen screen = new Screen();
         }
     }
+}

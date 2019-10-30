@@ -26,15 +26,12 @@ namespace AirTrafficMonitoring
         private void HandleTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             Tracks = new Track[e.TransponderData.Count];
-
-            string[] tokens;
-            char[] separator = {';'};
-
+            char[] separator = { ';' };
             int trackIndex = 0;
 
             foreach (var data in e.TransponderData)
             {
-                tokens = data.Split(separator);
+                string[] tokens = data.Split(separator);
                 Tracks[trackIndex] = new Track()
                 {
                     Tag = tokens[0],
@@ -43,6 +40,7 @@ namespace AirTrafficMonitoring
                     Z = int.Parse(tokens[3]),
                     Timestamp = DateTime.ParseExact(tokens[4], "yyyyMMddHHmmssfff", null)
                 };
+
                 trackIndex++;
             }
 

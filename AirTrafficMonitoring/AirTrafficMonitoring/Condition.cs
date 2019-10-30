@@ -9,22 +9,21 @@ namespace AirTrafficMonitoring
     public class Condition
     {
         public bool sepration = false;
-        public List<Track> conflictTrack1 = new List<Track>();
-        public List<Track> conflictTrack2 = new List<Track>();
-        public List<int> conflicDistanceVertical = new List<int>();
-        public List<int> conflicDistacneHorizontal = new List<int>();
+        public List<Track> conflictTrack1;
+        public List<Track> conflictTrack2;
 
         public Condition()
         {
-
+            conflictTrack1 = new List<Track>();
+            conflictTrack2 = new List<Track>();
         }
 
         public bool TooClose(List<Track> tracks )
         {
+            List<Track> bufConflictTrack1 = conflictTrack1.ToList();
+            List<Track> bufConflictTrack2 = conflictTrack2.ToList();
             conflictTrack1.Clear();
             conflictTrack2.Clear();
-            conflicDistanceVertical.Clear();
-            conflicDistacneHorizontal.Clear();
 
             if (tracks.Count >= 2)
             {
@@ -45,10 +44,24 @@ namespace AirTrafficMonitoring
 
                             if (distanceVertical < 5000 && distanceHorizontal < 300)
                             {
-                                this.conflictTrack1.Add(bufTrack);
-                                this.conflictTrack2.Add(tracks[i]);
-                                this.conflicDistanceVertical.Add(Convert.ToInt32(distanceVertical));
-                                this.conflicDistacneHorizontal.Add(Convert.ToInt32(distanceHorizontal));
+                                bool exist = false;
+                                for (int c = 0; c < bufConflictTrack1.Count(); c++)
+                                {
+                                    if((bufConflictTrack1[c].Tag == bufTrack.Tag) && (bufConflictTrack2[c].Tag == tracks[i].Tag))
+                                    {
+                                        this.conflictTrack1.Add(bufConflictTrack1[c]);
+                                        this.conflictTrack2.Add(bufConflictTrack2[c]);
+                                        exist = true;
+                                    }
+                                }
+
+                                if (exist == false)
+                                {
+                                    this.conflictTrack1.Add(bufTrack);
+                                    this.conflictTrack2.Add(tracks[i]);
+                                    Program.fileWriter.WriteToLog(bufTrack, tracks[i]);
+                                }
+
                                 this.sepration = true;
                             }
                         }
@@ -72,16 +85,6 @@ namespace AirTrafficMonitoring
         public List<Track> GetConflictAirplain2()
         {
             return conflictTrack2;
-        }
-
-        public List<int> GetConflictDistanceVertical()
-        {
-            return conflicDistanceVertical;
-        }
-
-        public List<int> GetConflictDistanceHorizontal()
-        {
-            return conflicDistacneHorizontal;
         }
     }
 }

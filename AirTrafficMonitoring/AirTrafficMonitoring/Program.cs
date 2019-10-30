@@ -11,7 +11,6 @@ namespace AirTrafficMonitoring
     class Program
     {
         public static Airspace airSpace = new Airspace();
-        public static TrackCalculator trackCalculator = new TrackCalculator();
         public static Condition condition = new Condition();
         public static FileWriter fileWriter = new FileWriter("AirLogger.txt");
         public static Screen screen = new Screen();
@@ -30,7 +29,7 @@ namespace AirTrafficMonitoring
             }
         }
 
-        static void air_ThresholdReached(object sender, EventArgs e)//New airplains
+        static void air_ThresholdReached(object sender, EventArgs e)//New airplains event
         {
             screen.printTracks(airSpace.GetTracks());
             condition.TooClose(airSpace.GetTracks());
@@ -39,8 +38,7 @@ namespace AirTrafficMonitoring
             {
                 for (int x = 0; x < condition.conflictTrack1.Count(); x++)
                 {
-                    screen.printConflict(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x], condition.GetConflictDistanceVertical()[x], condition.GetConflictDistanceHorizontal()[x]);
-                    fileWriter.WriteToLog(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x]);
+                    screen.printConflict(condition.GetConflictAirplain1()[x], condition.GetConflictAirplain2()[x]);
                 }
             }
         }

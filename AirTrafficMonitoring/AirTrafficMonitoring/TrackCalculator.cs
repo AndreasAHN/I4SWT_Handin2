@@ -8,46 +8,33 @@ namespace AirTrafficMonitoring
 {
     public class TrackCalculator
     {
-        private TrackCalculator calculator;
-        private List<Track> _oldTrack = new List<Track>();
+        private List<Track> _oldTrack;
+
+        public TrackCalculator()
+        {
+            _oldTrack = new List<Track>();
+        }
+
 
         public List<Track> TrackCalculate(List<Track> track)
         {
-            List<Track> buffTrack = new List<Track>();
-
-            if (track.Count() >= 1)
+            if (_oldTrack.Count != 0)
             {
-                for (int i = 0; i < track.Count; i++)
+                for (int i = 0; i < track.Count(); i++)
                 {
-                    bool found = false;
-
-                    for (int x = 0; x < _oldTrack.Count; x++)
+                    for (int x = 0; x < _oldTrack.Count(); x++)
                     {
                         if (_oldTrack[x].Tag == track[i].Tag)
                         {
-                            buffTrack.Add(track[i]);
-                            buffTrack[buffTrack.Count - 1].Velocity = CalculateVelocity(track[i], _oldTrack[x]);
-                            buffTrack[buffTrack.Count - 1].CompassCourse = CalculateCompassCourse(track[i], _oldTrack[x]);
-                            found = true;
-                        }
-                        else if ((x < _oldTrack.Count) && (found == false))
-                        {
-                            buffTrack.Add(track[i]);
+                            track[i].Velocity = CalculateVelocity(track[i], _oldTrack[x]);
+                            track[i].CompassCourse = CalculateCompassCourse(track[i], _oldTrack[x]);
                         }
                     }
                 }
-
-                //_oldTrack.Clear();
-                _oldTrack = track;
-
-                return buffTrack;
-            }
-            else
-            {
-                _oldTrack = track;
-                return track;
             }
 
+            _oldTrack = track.ToList();
+            return track;
         }
 
 
@@ -59,11 +46,10 @@ namespace AirTrafficMonitoring
             var timeDifference = (newTrack.Timestamp - oldTrack.Timestamp).Milliseconds;
 
             var velocity = distance / timeDifference * 1000;
-
+            
+            //Console.WriteLine("Velocity: {0} , {1}, {2}", velocity, newTrack.Tag, oldTrack.Tag);
+            
             return (int) velocity;
-
-            //Console.WriteLine($"Velocity: {velocity}");
-
         }
 
 
@@ -80,9 +66,9 @@ namespace AirTrafficMonitoring
                 compassCourseAngle = compassCourseAngle + 360;
             }
 
-            return (int) compassCourseAngle;
+            //Console.WriteLine("Compass course: {0}", compassCourseAngle);
 
-            //Console.WriteLine($"Compass course: {compassCourse}");
+            return (int) compassCourseAngle; 
         }
     }
 }
