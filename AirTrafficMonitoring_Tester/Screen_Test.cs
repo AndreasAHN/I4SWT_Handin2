@@ -73,14 +73,12 @@ namespace AirTrafficMonitoring_Tester
             Screen screen = new Screen();
             screen.printTracks(_testData);
 
-            List<string> expectedResult = new List<string> 
-            { 
-                "-------------------------------------------------------------------------------------------------------------------------",
-                "0:\tTag: " + _testData[0].Tag + "\tCoordinates: (" + _testData[0].X + ", " + _testData[0].Y + ", " + _testData[0].Z + ")\tSpeed: " + _testData[0].Velocity + "\tBearing: " + _testData[0].CompassCourse + "\tTime: " + _testData[0].Timestamp,
-                "1:\tTag: " + _testData[1].Tag + "\tCoordinates: (" + _testData[1].X + ", " + _testData[1].Y + ", " + _testData[1].Z + ")\tSpeed: " + _testData[1].Velocity + "\tBearing: " + _testData[1].CompassCourse + "\tTime: " + _testData[1].Timestamp,
-                "2:\tTag: " + _testData[2].Tag + "\tCoordinates: (" + _testData[2].X + ", " + _testData[2].Y + ", " + _testData[2].Z + ")\tSpeed: " + _testData[2].Velocity + "\tBearing: " + _testData[2].CompassCourse + "\tTime: " + _testData[2].Timestamp,
-                "-------------------------------------------------------------------------------------------------------------------------"
-            };
+            List<string> expectedResult = new List<string> ;
+            expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
+            expectedResult.Add("0:\tTag: " + _testData[0].Tag + "\tCoordinates: (" + _testData[0].X + ", " + _testData[0].Y + ", " + _testData[0].Z + ")\tSpeed: " + _testData[0].Velocity + "\tBearing: " + _testData[0].CompassCourse + "\tTime: " + _testData[0].Timestamp);
+            expectedResult.Add("1:\tTag: " + _testData[1].Tag + "\tCoordinates: (" + _testData[1].X + ", " + _testData[1].Y + ", " + _testData[1].Z + ")\tSpeed: " + _testData[1].Velocity + "\tBearing: " + _testData[1].CompassCourse + "\tTime: " + _testData[1].Timestamp);
+            expectedResult.Add("2:\tTag: " + _testData[2].Tag + "\tCoordinates: (" + _testData[2].X + ", " + _testData[2].Y + ", " + _testData[2].Z + ")\tSpeed: " + _testData[2].Velocity + "\tBearing: " + _testData[2].CompassCourse + "\tTime: " + _testData[2].Timestamp);
+            expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
 
             Assert.Equals(expectedResult, screen.PrintTracksOutput.ToList());
         }
@@ -127,8 +125,8 @@ namespace AirTrafficMonitoring_Tester
             screen.printConflict(_testData1, _testData2);
 
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
-
-            Assert.Equals(expectedResult, screen.PrintTracksOutput.ToList()[0]);
+            string output = screen.PrintTracksOutput.ToList()[0];
+            Assert.Equals(expectedResult, output);
         }
     }
 }
