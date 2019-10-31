@@ -8,7 +8,8 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoring
 {
-    class Program
+    class Program 
+    //Main er vores AirTrafficController, da denne ikke har fået sin egen klasse
     {
         private static ICondition _condition;
         private static IFileWriter _fileWriter;
@@ -18,7 +19,7 @@ namespace AirTrafficMonitoring
 
 
 
-        public static bool runner = true; //Kan sætte til false, fra resten af programet, for at standse koden.
+        public static bool runner = true; //Kan sætte til false fra resten af programmet, for at standse koden.
         static void Main(string[] args)
         {
             // TransponderReceiverClient
