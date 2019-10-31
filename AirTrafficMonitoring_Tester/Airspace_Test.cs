@@ -43,11 +43,11 @@ namespace AirTrafficMonitoring_Tester
         {
             _trackData.Add(new Track { Tag = "AAA111", X = 90000, Y = 90000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "BBB222", X = 90000, Y = 90000, Z = 8000, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "CCC333", X = 90000, Y = 90000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
 
             _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
 
-            Assert.AreNotEqual(3, _uut.GetTracks().Count);
+            Assert.AreNotEqual(2, _uut.GetTracks().Count);
 
             
             /*
