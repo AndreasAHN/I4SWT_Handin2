@@ -125,7 +125,7 @@ namespace AirTrafficMonitoring_Tester
             Screen screen = new Screen();
             screen.printConflict(_testData1, _testData2);
 
-            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
+            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp;
             List<string> buf = screen.PrintConflictOutput.ToList();
             string output = buf[0];
             Assert.Equals(expectedResult, output);
