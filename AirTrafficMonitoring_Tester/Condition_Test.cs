@@ -21,7 +21,7 @@ namespace AirTrafficMonitoring_Tester
             _testData = new List<Track>();
         }
 
-
+        //Vertical = 5000 and Horizontal = 0
         [Test]
         public void Test_MaxBoundary_x_SeperationFound()
         {
@@ -34,9 +34,9 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
+            Assert.IsTrue(condition.GetSeperation());
 
-
-            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List <Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
             Assert.AreEqual(_testData[0], conflictAirplain1[0]);
@@ -45,6 +45,31 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 5001 and Horizontal = 0
+        [Test]
+        public void Test_MaxBoundary_x_SeperationNotFound()
+        {
+            _testData.Add(new Track { Tag = "GPJ740", X = 1, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 5002, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+            IFileWriter _fileWriter;
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            Assert.IsFalse(condition.TooClose(_testData));
+            Assert.IsFalse(condition.GetSeperation());
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+            Assert.AreEqual(conflictAirplain1.Count(), 0);
+            Assert.AreEqual(conflictAirplain2.Count(), 0);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        //Vertical = 5000 and Horizontal = 0
         [Test]
         public void Test_MaxBoundary_y_SeperationFound()
         {
@@ -57,7 +82,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -68,11 +93,37 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 5001 and Horizontal = 0
+        [Test]
+        public void Test_MaxBoundary_y_SeperationNotFound()
+        {
+            _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 1, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 2500, Y = 5002, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+            IFileWriter _fileWriter;
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            Assert.IsFalse(condition.TooClose(_testData));
+            Assert.IsFalse(condition.GetSeperation());
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+            Assert.AreEqual(conflictAirplain1.Count(), 0);
+            Assert.AreEqual(conflictAirplain2.Count(), 0);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+
+        //Vertical = 4999,24 and Horizontal = 0
         [Test]
         public void Test_MaxBoundary_xy_SeperationFound()
         {
             _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "QRM275", X = 5000, Y = 5000, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 6035, Y = 6035, Z = 2500, Timestamp = DateTime.Now });
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
@@ -80,7 +131,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -91,6 +142,31 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 5000,66 and Horizontal = 0
+        [Test]
+        public void Test_MaxBoundary_xy_SeperationNotFound()
+        {
+            _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 6036, Y = 6036, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+            IFileWriter _fileWriter;
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            Assert.IsFalse(condition.TooClose(_testData));
+            Assert.IsFalse(condition.GetSeperation());
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+            Assert.AreEqual(conflictAirplain1.Count(), 0);
+            Assert.AreEqual(conflictAirplain2.Count(), 0);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        //Vertical = 0 and Horizontal = 300
         [Test]
         public void Test_MaxBoundary_z_SeperationFound()
         {
@@ -103,7 +179,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -114,6 +190,31 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 0 and Horizontal = 301
+        [Test]
+        public void Test_MaxBoundary_z_SeperationNotFound()
+        {
+            _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2501, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 2500, Y = 2500, Z = 2802, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+            IFileWriter _fileWriter;
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            Assert.IsFalse(condition.TooClose(_testData));
+            Assert.IsFalse(condition.GetSeperation());
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+            Assert.AreEqual(conflictAirplain1.Count(), 0);
+            Assert.AreEqual(conflictAirplain2.Count(), 0);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        //Vertical = 2500 and Horizontal = 0
         [Test]
         public void Test_MidBoundary_x_SeperationFound()
         {
@@ -126,7 +227,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -137,6 +238,7 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 2500 and Horizontal = 0
         [Test]
         public void Test_MidBoundary_y_SeperationFound()
         {
@@ -149,7 +251,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -160,6 +262,7 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 0 and Horizontal = 150
         [Test]
         public void Test_MidBoundary_z_SeperationFound()
         {
@@ -172,7 +275,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -183,12 +286,12 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
-
+        //Vertical = 2500,33 and Horizontal = 0
         [Test]
         public void Test_MidBoundary_xy_SeperationFound()
         {
             _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "QRM275", X = 3750, Y = 3750, Z = 2500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 4268, Y = 4268, Z = 2500, Timestamp = DateTime.Now });
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
@@ -196,7 +299,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -207,6 +310,7 @@ namespace AirTrafficMonitoring_Tester
             File.Delete("AirplaneSeperations.txt");
         }
 
+        //Vertical = 0 and Horizontal = 0
         [Test]
         public void Test_MinBoundary_xyz_SeperationFound()
         {
@@ -219,7 +323,7 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
-
+            Assert.IsTrue(condition.GetSeperation());
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -231,7 +335,9 @@ namespace AirTrafficMonitoring_Tester
         }
 
 
-        public void Test_SeperationNoFound()
+        //Vertical = 14142,14 and Horizontal = 2500
+        [Test]
+        public void Test_SeperationNotFound()
         {
             _testData.Add(new Track { Tag = "GPJ740", X = 10000, Y = 10000, Z = 2500, Timestamp = DateTime.Now });
             _testData.Add(new Track { Tag = "QRM275", X = 20000, Y = 20000, Z = 5000, Timestamp = DateTime.Now });

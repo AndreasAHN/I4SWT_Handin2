@@ -35,6 +35,7 @@ namespace AirTrafficMonitoring_Tester
             //StringAssert.Contains("WIA512", track[2].Tag);
         }
 
+        [Test]
         public void Test_PrintConflict()
         {
             Screen screen = new Screen();
