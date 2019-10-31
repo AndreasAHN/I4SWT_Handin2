@@ -17,11 +17,9 @@ namespace AirTrafficMonitoring_Tester
         private ITransponderReceiverClient _fakeTransponderReceiverClient;
         //der skulle oprettes en fake af TransponderReceiver grundet constructoren i TransponderReceiverClient
         //altså bruges TransponderReceiver ikke her
-        private ITransponderReceiver _faketransponderReceiver;
 
         private List<Track> _trackData;
         private Airspace _uut;
-        private DataReceivedEventArgs _receivedEventArgs;
 
 
         [SetUp]
