@@ -39,12 +39,7 @@ namespace AirTrafficMonitoring_Tester
             _testTracksNew.Add(new Track { Tag = "GVC241", X = 38794, Y = 78066, Z = 10800, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
             _testTracksNew.Add(new Track { Tag = "WIA512", X = 18357, Y = 25364, Z = 2000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 0, Velocity = 0 });
 
-            _testTracks.Add(_testTracksOld[0]);
-            _testTracks.Add(_testTracksNew[0]);
-            _testTracks.Add(_testTracksOld[1]);
-            _testTracks.Add(_testTracksNew[1]);
-            _testTracks.Add(_testTracksOld[2]);
-            _testTracks.Add(_testTracksNew[2]);
+
 
         }
 
@@ -59,9 +54,14 @@ namespace AirTrafficMonitoring_Tester
             resTrack.Add(new Track { Tag = "GVC241", X = 38794, Y = 78066, Z = 10800, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 26, Velocity = 325 }); 
             resTrack.Add(new Track { Tag = "WIA512", X = 18357, Y = 25364, Z = 2000, Timestamp = DateTime.ParseExact("20191024155402397", "yyyyMMddHHmmssfff", null), CompassCourse = 45, Velocity = 2055 });
 
-            //Console.WriteLine("Actual:   " + test1[1].X + test1[1].Y + test1[1].Z + test1[1].Velocity + test1[1].CompassCourse + test1[1].Timestamp);
-            //Console.WriteLine("Expected: " + resTrack[1].X + resTrack[1].Y + resTrack[1].Z + resTrack[1].Velocity + resTrack[1].CompassCourse + resTrack[1].Timestamp);
+            for (int i = 0; i < resTrack.Count; i++)
+            {
+                Console.WriteLine("Actual " + i +"\t" + test1[i].Tag + test1[i].X + test1[i].Y + test1[i].Z + test1[i].Velocity + test1[i].CompassCourse + "\t" + test1[i].Timestamp);
+                Console.WriteLine("Expected " + i + "\t" + resTrack[i].Tag + resTrack[i].X + resTrack[i].Y + resTrack[i].Z + resTrack[i].Velocity + resTrack[i].CompassCourse + "\t" + resTrack[i].Timestamp);
 
+                Assert.AreEqual(resTrack[i].CompassCourse, test1[i].CompassCourse);
+                Assert.AreEqual(resTrack[i].Velocity, test1[i].Velocity);
+            }
             Assert.AreEqual(resTrack[0].CompassCourse, test1[0].CompassCourse);
             Assert.AreEqual(resTrack[0].Velocity, test1[0].Velocity);
             Assert.AreEqual(resTrack[1].CompassCourse, test1[1].CompassCourse);
