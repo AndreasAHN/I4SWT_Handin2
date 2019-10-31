@@ -80,7 +80,8 @@ namespace AirTrafficMonitoring_Tester
             expectedResult.Add("2:\tTag: " + _testData[2].Tag + "\tCoordinates: (" + _testData[2].X + ", " + _testData[2].Y + ", " + _testData[2].Z + ")\tSpeed: " + _testData[2].Velocity + "\tBearing: " + _testData[2].CompassCourse + "\tTime: " + _testData[2].Timestamp);
             expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
 
-            Assert.Equals(expectedResult, screen.PrintTracksOutput.ToList());
+            List<string> output = screen.PrintTracksOutput.ToList();
+            Assert.Equals(expectedResult, output);
         }
 
         [Test]
@@ -125,7 +126,8 @@ namespace AirTrafficMonitoring_Tester
             screen.printConflict(_testData1, _testData2);
 
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
-            string output = ((screen.PrintTracksOutput.ToList())[0]).ToString();
+            List<string> buf = screen.PrintConflictOutput.ToList();
+            string output = buf[0];
             Assert.Equals(expectedResult, output);
         }
     }
