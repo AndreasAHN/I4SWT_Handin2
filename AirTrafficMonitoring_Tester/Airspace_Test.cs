@@ -41,13 +41,13 @@ namespace AirTrafficMonitoring_Tester
         public void Test_OutOfBounds()
         //et fly der ikke bevæger sig inden for Airspace´s rammer, kommer ikke ind
         {
-            _trackData.Add(new Track { Tag = "AAA111", X = 90000, Y = 90000, Z = 8000, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "BBB222", X = 90000, Y = 90000, Z = 8000, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "CCC333", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "AAA111", X = 79999, Y = 79999, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 80001, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
 
             _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
 
-            Assert.AreNotEqual(2, _uut.GetTracks().Count);
+            Assert.AreEqual(2, _uut.GetTracks().Count);
 
             
             /*
