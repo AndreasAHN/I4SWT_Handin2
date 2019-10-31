@@ -8,7 +8,7 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoring
 {
-    class Program
+    public class Program
     {
         private static ICondition _condition;
         private static IFileWriter _fileWriter;
@@ -33,7 +33,7 @@ namespace AirTrafficMonitoring
             _trackCalculator = new TrackCalculator();
             _airspace = new Airspace(_trackCalculator);
             transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
-            _airspace.AirSpaceChanged += air_ThresholdReached;
+            _airspace.AirSpaceChanged += HandleAirspaceChangedEvent;
 
             // Screen
             _screen = new Screen();
@@ -45,7 +45,7 @@ namespace AirTrafficMonitoring
             }
         }
 
-        static void air_ThresholdReached(object sender, EventArgs e)//New airplains event
+        public static void HandleAirspaceChangedEvent(object sender, EventArgs e)
         {
             _screen.printTracks(_airspace.GetTracks());
             _condition.TooClose(_airspace.GetTracks());
