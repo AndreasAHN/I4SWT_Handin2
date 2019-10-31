@@ -82,7 +82,7 @@ namespace AirTrafficMonitoring_Tester
                 "-------------------------------------------------------------------------------------------------------------------------"
             };
 
-            Assert.Equals(expectedResult, screen.PrintTracksOutput);
+            Assert.Equals(expectedResult, screen.PrintTracksOutput.ToList());
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace AirTrafficMonitoring_Tester
 
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
 
-            Assert.Equals(expectedResult, screen.PrintTracksOutput[0]);
+            Assert.Equals(expectedResult, screen.PrintTracksOutput.ToList()[0]);
         }
     }
 }
