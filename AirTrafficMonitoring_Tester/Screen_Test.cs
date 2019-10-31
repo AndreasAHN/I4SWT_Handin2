@@ -33,7 +33,7 @@ namespace AirTrafficMonitoring_Tester
             var consolReader = new Process();
             consolReader.StartInfo.UseShellExecute = false;
             consolReader.StartInfo.RedirectStandardOutput = true;
-            consolReader.StartInfo.FileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            consolReader.StartInfo.FileName = Process.GetCurrentProcess().MainModule.FileName;
             consolReader.Start();
 
             Screen screen = new Screen();
@@ -60,6 +60,29 @@ namespace AirTrafficMonitoring_Tester
             Console.WriteLine(result);
 
             Assert.IsTrue(expectedResult.Contains(result));
+        }
+
+        [Test]
+        public void Test_PrintTracksOutput()
+        {
+            List<Track> _testData = new List<Track>();
+            _testData.Add(new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+            Screen screen = new Screen();
+            screen.printTracks(_testData);
+
+            List<string> expectedResult = new List<string> 
+            { 
+                "-------------------------------------------------------------------------------------------------------------------------",
+                "0:\tTag: " + _testData[0].Tag + "\tCoordinates: (" + _testData[0].X + ", " + _testData[0].Y + ", " + _testData[0].Z + ")\tSpeed: " + _testData[0].Velocity + "\tBearing: " + _testData[0].CompassCourse + "\tTime: " + _testData[0].Timestamp,
+                "1:\tTag: " + _testData[1].Tag + "\tCoordinates: (" + _testData[1].X + ", " + _testData[1].Y + ", " + _testData[1].Z + ")\tSpeed: " + _testData[1].Velocity + "\tBearing: " + _testData[1].CompassCourse + "\tTime: " + _testData[1].Timestamp,
+                "2:\tTag: " + _testData[2].Tag + "\tCoordinates: (" + _testData[2].X + ", " + _testData[2].Y + ", " + _testData[2].Z + ")\tSpeed: " + _testData[2].Velocity + "\tBearing: " + _testData[2].CompassCourse + "\tTime: " + _testData[2].Timestamp,
+                "-------------------------------------------------------------------------------------------------------------------------"
+            };
+
+            Assert.Equals(expectedResult, screen.PrintTracksOutput);
         }
 
         [Test]
@@ -91,6 +114,21 @@ namespace AirTrafficMonitoring_Tester
             Console.WriteLine(result);
 
             Assert.IsTrue(expectedResult.Contains(result));
+        }
+
+
+        [Test]
+        public void Test_PrintConflictOutput()
+        {
+            Track _testData1 = (new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
+            Track _testData2 = (new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
+
+            Screen screen = new Screen();
+            screen.printConflict(_testData1, _testData2);
+
+            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
+
+            Assert.Equals(expectedResult, screen.PrintTracksOutput[0]);
         }
     }
 }
