@@ -20,17 +20,17 @@ namespace AirTrafficMonitoring_Tester
         }
 
 
-        //[Test]
-        //public void Test_PrintTracks()
-        //{
-        //    List<Track> _testData = new List<Track>();
-        //    _testData.Add(new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
-        //    _testData.Add(new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
-        //    _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+        [Test]
+        public void Test_PrintTracks()
+        {
+            List<Track> _testData = new List<Track>();
+            _testData.Add(new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
+            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
-        //    Screen screen = new Screen();
-        //    screen.printTracks(_testData);
-        //}
+            Screen screen = new Screen();
+            screen.printTracks(_testData);
+        }
 
         [Test]
         public void Test_PrintConflict()
