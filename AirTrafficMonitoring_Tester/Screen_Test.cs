@@ -125,7 +125,7 @@ namespace AirTrafficMonitoring_Tester
             screen.printConflict(_testData1, _testData2);
 
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp + "\n";
-            string output = screen.PrintTracksOutput.ToList()[0];
+            string output = ((screen.PrintTracksOutput.ToList())[0]).ToString();
             Assert.Equals(expectedResult, output);
         }
     }
