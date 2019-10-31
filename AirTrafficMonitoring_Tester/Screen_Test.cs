@@ -33,7 +33,7 @@ namespace AirTrafficMonitoring_Tester
             var consolReader = new Process();
             consolReader.StartInfo.UseShellExecute = false;
             consolReader.StartInfo.RedirectStandardOutput = true;
-            consolReader.StartInfo.FileName = "csc.exe";
+            consolReader.StartInfo.FileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             consolReader.Start();
 
             Screen screen = new Screen();
@@ -42,7 +42,24 @@ namespace AirTrafficMonitoring_Tester
             string result = consolReader.StandardOutput.ReadToEnd();
             consolReader.WaitForExit();
 
+            string expectedResult =
+            (
+                "-------------------------------------------------------------------------------------------------------------------------" + "\n" +
+                "0:\tTag: " + _testData[0].Tag + "\tCoordinates: (" + _testData[0].X + ", " + _testData[0].Y + ", " + _testData[0].Z + ")\tSpeed: " + _testData[0].Velocity + "\tBearing: " + _testData[0].CompassCourse + "\tTime: " + _testData[0].Timestamp + "\n" +
+                "1:\tTag: " + _testData[1].Tag + "\tCoordinates: (" + _testData[1].X + ", " + _testData[1].Y + ", " + _testData[1].Z + ")\tSpeed: " + _testData[1].Velocity + "\tBearing: " + _testData[1].CompassCourse + "\tTime: " + _testData[1].Timestamp + "\n" +
+                "2:\tTag: " + _testData[2].Tag + "\tCoordinates: (" + _testData[2].X + ", " + _testData[2].Y + ", " + _testData[2].Z + ")\tSpeed: " + _testData[2].Velocity + "\tBearing: " + _testData[2].CompassCourse + "\tTime: " + _testData[2].Timestamp + "\n" +
+                "-------------------------------------------------------------------------------------------------------------------------" + "\n" 
+            );
+
+            Console.WriteLine("\n Orginale oven over:");
+
+            Console.WriteLine("\n\n Forventet output:\n");
+            Console.WriteLine(expectedResult);
+
+            Console.WriteLine("\n\n Opnåede output:\n");
             Console.WriteLine(result);
+
+            Assert.IsTrue(expectedResult.Contains(result));
         }
 
         [Test]
@@ -54,7 +71,7 @@ namespace AirTrafficMonitoring_Tester
             var consolReader = new Process();
             consolReader.StartInfo.UseShellExecute = false;
             consolReader.StartInfo.RedirectStandardOutput = true;
-            consolReader.StartInfo.FileName = "csc.exe";
+            consolReader.StartInfo.FileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             consolReader.Start();
 
             Screen screen = new Screen();
@@ -63,7 +80,17 @@ namespace AirTrafficMonitoring_Tester
             string result = consolReader.StandardOutput.ReadToEnd();
             consolReader.WaitForExit();
 
+            string expectedResult ="\n" + "!WARNING-SEPERATION! "+_testData1.Tag+" and "+_testData2.Tag+", at: "+_testData1.Timestamp + "\n";
+
+            Console.WriteLine("\n Orginale oven over:");
+
+            Console.WriteLine("\n\n Forventet output:\n");
+            Console.WriteLine(expectedResult);
+
+            Console.WriteLine("\n\n Opnåede output:\n");
             Console.WriteLine(result);
+
+            Assert.IsTrue(expectedResult.Contains(result));
         }
     }
 }
