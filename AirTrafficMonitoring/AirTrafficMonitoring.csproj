@@ -49,7 +49,7 @@
     <Compile Include="Airspace.cs" />
     <Compile Include="Condition.cs" />
     <Compile Include="DataReceivedEventArgs.cs" />
-    <Compile Include="SeperationConditionLogger.cs" />
+    <Compile Include="SeparationConditionLogger.cs" />
     <Compile Include="Interfaces\IAirspace.cs" />
     <Compile Include="Interfaces\ICondition.cs" />
     <Compile Include="Interfaces\IFileWriter.cs" />

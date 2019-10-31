@@ -31,7 +31,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -55,7 +55,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
@@ -79,7 +79,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -103,7 +103,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
@@ -128,7 +128,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -152,7 +152,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
@@ -176,7 +176,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -200,7 +200,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
@@ -224,7 +224,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -248,7 +248,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -272,7 +272,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -296,7 +296,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -320,7 +320,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
@@ -345,7 +345,7 @@ namespace AirTrafficMonitoring_Tester
             _testData.Add(new Track { Tag = "ONC788", X = 30000, Y = 30000, Z = 7500, Timestamp = DateTime.Now });
 
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
@@ -360,7 +360,7 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes() //Time on sepration must not change
         {
             IFileWriter _fileWriter;
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             Condition condition = new Condition(_fileWriter);
 
             bool firstRun = true;

@@ -26,7 +26,7 @@ namespace AirTrafficMonitoring
             var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
 
             // Condition
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
             _condition = new Condition(_fileWriter);
 
             // Airspace
