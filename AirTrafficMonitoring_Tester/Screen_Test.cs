@@ -42,13 +42,12 @@ namespace AirTrafficMonitoring_Tester
             string result = consolReader.StandardOutput.ReadToEnd();
             consolReader.WaitForExit();
 
-            List<string> expectedResult = new List<string>();
-            expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
+            string expectedResult ="-------------------------------------------------------------------------------------------------------------------------";
             for (int i = 0; i < _testData.Count(); i++)
             {
-                expectedResult.Add(i + ":\tTag: " + _testData[i].Tag + "\tCoordinates: (" + _testData[i].X + ", " + _testData[i].Y + ", " + _testData[i].Z + ")\tSpeed: " + _testData[i].Velocity + "\tBearing: " + _testData[i].CompassCourse + "\tTime: " + _testData[i].Timestamp);
+                expectedResult += (i + ":\tTag: " + _testData[i].Tag + "\tCoordinates: (" + _testData[i].X + ", " + _testData[i].Y + ", " + _testData[i].Z + ")\tSpeed: " + _testData[i].Velocity + "\tBearing: " + _testData[i].CompassCourse + "\tTime: " + _testData[i].Timestamp);
             }
-            expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
+            expectedResult += ("-------------------------------------------------------------------------------------------------------------------------");
 
             Console.WriteLine("\n Orginale oven over:");
 
@@ -83,7 +82,7 @@ namespace AirTrafficMonitoring_Tester
             List<string> output = screen.GetprintTracksOutput().ToList();
             for (int i = 0; i < output.Count(); i++)
             {
-                //Assert.Equals(expectedResult[i], output[i]);
+                Assert.AreEqual(expectedResult[i], output[i]);
             }
         }
 
@@ -131,7 +130,7 @@ namespace AirTrafficMonitoring_Tester
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp;
             List<string> buf = screen.GetprintConflictOutput().ToList();
             string output = buf[0];
-            //Assert.Equals(expectedResult, output);
+            Assert.AreEqual(expectedResult, output);
         }
     }
 }
