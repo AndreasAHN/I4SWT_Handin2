@@ -11,10 +11,10 @@ namespace AirTrafficMonitoring
     class Program 
     //Main er vores AirTrafficController, da denne ikke har fået sin egen klasse
     {
-        private static ICondition _condition;
-        private static IFileWriter _fileWriter;
         private static IAirspace _airspace;
         private static ITrackCalculator _trackCalculator;
+        private static ICondition _condition;
+        private static IFileWriter _fileWriter;
         private static IScreen _screen;
 
 
