@@ -8,7 +8,8 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitoring
 {
-    public class Program
+    class Program 
+    //Main er vores AirTrafficController, da denne ikke har fået sin egen klasse
     {
         private static ICondition _condition;
         private static IFileWriter _fileWriter;
@@ -18,7 +19,7 @@ namespace AirTrafficMonitoring
 
 
 
-        public static bool runner = true; //Kan sætte til false, fra resten af programet, for at standse koden.
+        public static bool runner = true; //Kan sætte til false fra resten af programmet, for at standse koden.
         static void Main(string[] args)
         {
             // TransponderReceiverClient
@@ -33,7 +34,7 @@ namespace AirTrafficMonitoring
             _trackCalculator = new TrackCalculator();
             _airspace = new Airspace(_trackCalculator);
             transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
-            _airspace.AirSpaceChanged += HandleAirspaceChangedEvent;
+            _airspace.AirSpaceChanged += air_ThresholdReached;
 
             // Screen
             _screen = new Screen();
@@ -45,7 +46,7 @@ namespace AirTrafficMonitoring
             }
         }
 
-        public static void HandleAirspaceChangedEvent(object sender, EventArgs e)
+        static void air_ThresholdReached(object sender, EventArgs e)//New airplains event
         {
             _screen.printTracks(_airspace.GetTracks());
             _condition.TooClose(_airspace.GetTracks());

@@ -9,9 +9,9 @@ namespace AirTrafficMonitoring
     public class Condition : ICondition
     {
         private IFileWriter _fileWriter;
-        public bool sepration = false;
-        public List<Track> conflictTrack1;
-        public List<Track> conflictTrack2;
+        private bool sepration = false;
+        private List<Track> conflictTrack1;
+        private List<Track> conflictTrack2;
 
         public Condition(IFileWriter fileWriter)
         {
