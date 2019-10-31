@@ -81,7 +81,10 @@ namespace AirTrafficMonitoring_Tester
             expectedResult.Add("-------------------------------------------------------------------------------------------------------------------------");
 
             List<string> output = screen.PrintTracksOutput.ToList();
-            Assert.Equals(expectedResult, output);
+            for (int i = 0; i < output.Count(); i++)
+            {
+                Assert.Equals(expectedResult[i], output[i]);
+            }
         }
 
         [Test]
