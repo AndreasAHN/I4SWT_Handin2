@@ -14,7 +14,7 @@ namespace AirTrafficMonitoring
         private static IFileWriter _fileWriter;
         private static IAirspace _airspace;
         private static ITrackCalculator _trackCalculator;
-        private static Screen _screen;
+        private static IScreen _screen;
 
 
 

@@ -7,6 +7,7 @@ using AirTrafficMonitoring;
 using NSubstitute;
 using NUnit.Framework;
 using System.IO;
+using System.Threading;
 
 namespace AirTrafficMonitoring_Tester
 {
@@ -349,6 +350,58 @@ namespace AirTrafficMonitoring_Tester
 
             Assert.IsFalse(condition.TooClose(_testData));
             Assert.IsFalse(condition.GetSeperation());
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+
+        //Vertical = 14142,14 and Horizontal = 2500
+        [Test]
+        public void Test_SeperationFoundMultipleTimes() //Time on sepration must not change
+        {
+            IFileWriter _fileWriter;
+            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            bool firstRun = true;
+            DateTime start = new DateTime();
+            
+            for (int i = 0; i < 10; i++)
+            {
+                _testData.Clear();
+
+                if (firstRun)
+                {
+                    start = DateTime.Now;
+
+                    _testData.Add(new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
+                    _testData.Add(new Track { Tag = "QRM275", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now });
+                    _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+
+                    firstRun = false;
+                }
+                else
+                {
+                    _testData.Add(new Track { Tag = "GPJ740", X = (2500 + i), Y = (2500 + i), Z = (2500 + i), Timestamp = DateTime.Now });
+                    _testData.Add(new Track { Tag = "QRM275", X = (2500 + i), Y = (2500 + i), Z = (2500 + i), Timestamp = DateTime.Now });
+                    _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+                }
+
+                Assert.IsTrue(condition.TooClose(_testData));
+                Assert.IsTrue(condition.GetSeperation());
+
+                List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+                List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+                Assert.AreEqual(_testData[0].Tag, conflictAirplain1[0].Tag);
+                Assert.AreEqual(_testData[1].Tag, conflictAirplain2[0].Tag);
+                Assert.AreEqual(start, conflictAirplain1[0].Timestamp);
+                Assert.AreEqual(start, conflictAirplain2[0].Timestamp);
+
+                Thread.Sleep(500);
+            }
+
+
 
             File.Delete("AirplaneSeperations.txt");
         }
