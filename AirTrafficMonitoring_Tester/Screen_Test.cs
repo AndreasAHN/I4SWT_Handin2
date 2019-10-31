@@ -82,7 +82,7 @@ namespace AirTrafficMonitoring_Tester
             List<string> output = screen.GetprintTracksOutput().ToList();
             for (int i = 0; i < output.Count(); i++)
             {
-                Assert.Equals(expectedResult[i], output[i]);
+                Assert.AreEqual(expectedResult[i], output[i]);
             }
         }
 
@@ -130,7 +130,7 @@ namespace AirTrafficMonitoring_Tester
             string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp;
             List<string> buf = screen.GetprintConflictOutput().ToList();
             string output = buf[0];
-            Assert.Equals(expectedResult, output);
+            Assert.AreEqual(expectedResult, output);
         }
     }
 }
