@@ -49,21 +49,34 @@ namespace AirTrafficMonitoring
                                 bool exist = false;
                                 for (int c = 0; c < bufConflictTrack1.Count(); c++)
                                 {
-                                    if((bufConflictTrack1[c].Tag == bufTrack.Tag) && (bufConflictTrack2[c].Tag == tracks[i].Tag))
+                                    if ((conflictTrack1.Count() > c) && ((!(conflictTrack1[c].Tag == bufTrack.Tag) && !(conflictTrack2[c].Tag == tracks[i].Tag) || (!(conflictTrack2[c].Tag == bufTrack.Tag) && !(conflictTrack1[c].Tag == tracks[i].Tag)))))
+                                    {
+                                        exist = true;
+                                        break;
+                                    }
+                                    else if (((bufConflictTrack1[c].Tag == bufTrack.Tag) || (bufConflictTrack2[c].Tag == tracks[i].Tag)))
                                     {
                                         this.conflictTrack1.Add(bufConflictTrack1[c]);
                                         this.conflictTrack2.Add(bufConflictTrack2[c]);
                                         exist = true;
+                                        break;
                                     }
+                                }
+
+                                if ((conflictTrack1.Count() != 0) && ((!(conflictTrack1[0].Tag == bufTrack.Tag) && !(conflictTrack2[0].Tag == tracks[i].Tag) || (!(conflictTrack2[0].Tag == bufTrack.Tag) && !(conflictTrack1[0].Tag == tracks[i].Tag)))))
+                                {
+                                    exist = true;
                                 }
 
                                 if (exist == false)
                                 {
+                                    bufTrack.Timestamp = DateTime.Now;
+                                    Track bufTrack2 = tracks[i];
+                                    bufTrack2.Timestamp = bufTrack.Timestamp;
                                     this.conflictTrack1.Add(bufTrack);
-                                    this.conflictTrack2.Add(tracks[i]);
-                                    _fileWriter.WriteToFile(bufTrack, tracks[i]);
+                                    this.conflictTrack2.Add(bufTrack2);
+                                    _fileWriter.WriteToFile(bufTrack, bufTrack2);
                                 }
-
                                 this.sepration = true;
                             }
                         }
