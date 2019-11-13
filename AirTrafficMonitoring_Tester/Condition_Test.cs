@@ -14,10 +14,15 @@ namespace AirTrafficMonitoring_Tester
     [TestFixture]
     public class Condition_Test
     {
+        public IFileWriter _fileWriter;
+        public Condition condition;
+
         [SetUp]
         public void Setup()
         {
-
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            condition = new Condition(_fileWriter);
         }
 
 
@@ -122,10 +127,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationFound")]
         public void Test_SeperationFound(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             Assert.IsTrue(condition.TooClose(_testData));
 
             File.Delete("AirplaneSeperations.txt");
@@ -134,10 +135,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationFound")]
         public void Test_SeperationFound_GetFunction(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             condition.TooClose(_testData);
             Assert.IsTrue(condition.GetSeperation());
 
@@ -147,10 +144,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationFound")]
         public void Test_SeperationFound_TheRightPlainsFound(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             condition.TooClose(_testData);
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
@@ -225,10 +218,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationNotFound")]
         public void Test_SeperationNotFound(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             Assert.IsFalse(condition.TooClose(_testData));
 
             File.Delete("AirplaneSeperations.txt");
@@ -237,10 +226,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationNotFound")]
         public void Test_SeperationNotFound_GetFunktion(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             condition.TooClose(_testData);
             Assert.IsFalse(condition.GetSeperation());
 
@@ -250,10 +235,6 @@ namespace AirTrafficMonitoring_Tester
         [Test, TestCaseSource("TestCasesData_SeperationNotFound")]
         public void Test_SeperationNotFound_NoConflictAirplains(List<Track> _testData)
         {
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
-
             condition.TooClose(_testData);
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
@@ -289,9 +270,6 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :");
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
@@ -327,9 +305,6 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :");
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
@@ -351,18 +326,11 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :");
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
             DateTime start2 = new DateTime();
             start2 = _testDataBuf[1].Timestamp;
-
-            Thread.Sleep(500);
-
-            condition.TooClose(_testDataBuf);
 
             for (int i = 0; i < 10; i++)
             {
@@ -388,18 +356,11 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :");
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
             DateTime start2 = new DateTime();
             start2 = _testDataBuf[1].Timestamp;
-
-            Thread.Sleep(500);
-
-            condition.TooClose(_testDataBuf);
 
             for (int i = 0; i < 10; i++)
             {
@@ -428,18 +389,11 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :");
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
             DateTime start2 = new DateTime();
             start2 = _testDataBuf[1].Timestamp;
-
-            Thread.Sleep(500);
-
-            condition.TooClose(_testDataBuf);
 
             for (int i = 0; i < 10; i++)
             {
@@ -466,9 +420,6 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :" );
-            IFileWriter _fileWriter;
-            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
-            Condition condition = new Condition(_fileWriter);
 
             DateTime start1 = new DateTime();
             start1 = _testDataBuf[0].Timestamp;
