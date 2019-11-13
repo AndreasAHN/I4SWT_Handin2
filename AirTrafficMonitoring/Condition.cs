@@ -49,7 +49,7 @@ namespace AirTrafficMonitoring
                                 bool exist = false;
                                 for (int c = 0; c < bufConflictTrack1.Count(); c++)
                                 {
-                                    if ((conflictTrack1.Count() > c) && ((!(conflictTrack1[c].Tag == bufTrack.Tag) && !(conflictTrack2[c].Tag == tracks[i].Tag) || (!(conflictTrack2[c].Tag == bufTrack.Tag) && !(conflictTrack1[c].Tag == tracks[i].Tag)))))
+                                    if ((conflictTrack1.Count() > c) && (((conflictTrack1[c].Tag == bufTrack.Tag) && (conflictTrack2[c].Tag == tracks[i].Tag)) || ((conflictTrack2[c].Tag == bufTrack.Tag) && (conflictTrack1[c].Tag == tracks[i].Tag))))
                                     {
                                         exist = true;
                                         break;
