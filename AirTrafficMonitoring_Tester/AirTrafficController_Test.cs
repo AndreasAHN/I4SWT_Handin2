@@ -32,9 +32,9 @@ namespace AirTrafficMonitoring_Tester
 
             _uut = new AirTrafficController();
 
-            _fakeAirspace.AirSpaceChanged += _uut.air_ThresholdReached;
-
             _fakeTransponderReceiverClient.DataReadyEvent += _fakeAirspace.HandleDataReadyEvent;
+
+            _fakeAirspace.AirSpaceChanged += _uut.air_ThresholdReached;
 
         }
 
@@ -42,18 +42,16 @@ namespace AirTrafficMonitoring_Tester
         public void EventOccured()
         //tests if an event from Airspace is received
         {
-            _trackData.Add(new Track { Tag = "BBB222", X = 2500, Y = 2500, Z = 500, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "CCC333", X = 2500, Y = 2500, Z = 501, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "AAA111", X = 2500, Y = 2500, Z = 499, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "AAA111", X = 79999, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 80001, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
 
-            
+            _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
+
+
             var wasCalled = false;
             _fakeAirspace.AirSpaceChanged += (o, e) => wasCalled = true;
 
-
-
-
-            _fakeAirspace.HandleDataReadyEvent(null, new DataReceivedEventArgs(_trackData));
 
             Assert.IsTrue(wasCalled);
         }
