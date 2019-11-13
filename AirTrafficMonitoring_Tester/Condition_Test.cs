@@ -399,8 +399,8 @@ namespace AirTrafficMonitoring_Tester
                     new List<Track>()
                     {
                         new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now },
-                        new Track { Tag = "QRM275", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now },
-                        new Track { Tag = "ONC788", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now }
+                        new Track { Tag = "QRM275", X = 2501, Y = 2501, Z = 2501, Timestamp = DateTime.Now },
+                        new Track { Tag = "ONC788", X = 2502, Y = 2502, Z = 2502, Timestamp = DateTime.Now }
             }
                 ).SetName("Test_SeperationFoundMultipleTimes");
             }
