@@ -387,36 +387,5 @@ namespace AirTrafficMonitoring_Tester
 
             File.Delete("AirplaneSeperations.txt");
         }
-
-        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
-        public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_ConflictTimeNotChanging(List<Track> _testData) //Time on sepration must not change
-        {
-            List<Track> _testDataBuf = _testData.ToList();
-
-            condition.TooClose(_testDataBuf);
-
-            DateTime start1 = condition.GetConflictAirplain1()[0].Timestamp;
-            DateTime start2 = condition.GetConflictAirplain2()[0].Timestamp;
-
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < _testDataBuf.Count(); j++)
-                {
-                    _testDataBuf[j].X = (_testDataBuf[j].X + 1);
-                    _testDataBuf[j].Y = (_testDataBuf[j].Y + 1);
-                    _testDataBuf[j].Z = (_testDataBuf[j].Z + 1);
-                    _testDataBuf[j].Timestamp = DateTime.Now;
-                }
-                
-                condition.TooClose(_testDataBuf);
-
-                Assert.AreEqual(start1, condition.GetConflictAirplain1()[0].Timestamp);
-                Assert.AreEqual(start2, condition.GetConflictAirplain2()[0].Timestamp);
-
-                Thread.Sleep(100);
-            }
-
-            File.Delete("AirplaneSeperations.txt");
-        }
     }
 }
