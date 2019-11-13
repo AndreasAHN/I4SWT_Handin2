@@ -42,9 +42,9 @@ namespace AirTrafficMonitoring_Tester
         public void EventOccured()
         //tests if an event from Airspace is received
         {
-            _trackData.Add(new Track { Tag = "AAA111", X = 70000, Y = 70000, Z = 499, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "BBB222", X = 70000, Y = 70000, Z = 500, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "CCC333", X = 70000, Y = 70000, Z = 501, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 2500, Y = 2500, Z = 500, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 2500, Y = 2500, Z = 501, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "AAA111", X = 2500, Y = 2500, Z = 499, Timestamp = DateTime.Now });
 
             
             var wasCalled = false;
