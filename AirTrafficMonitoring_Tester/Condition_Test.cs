@@ -127,9 +127,33 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsTrue(condition.TooClose(_testData));
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        [Test, TestCaseSource("TestCasesData_SeperationFound")]
+        public void Test_SeperationFound_GetFunction(List<Track> _testData)
+        {
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            condition.TooClose(_testData);
             Assert.IsTrue(condition.GetSeperation());
 
-            List <Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        [Test, TestCaseSource("TestCasesData_SeperationFound")]
+        public void Test_SeperationFound_TheRightPlainsFound(List<Track> _testData)
+        {
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            condition.TooClose(_testData);
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
             Assert.AreEqual(_testData[0], conflictAirplain1[0]);
@@ -206,7 +230,31 @@ namespace AirTrafficMonitoring_Tester
             Condition condition = new Condition(_fileWriter);
 
             Assert.IsFalse(condition.TooClose(_testData));
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        [Test, TestCaseSource("TestCasesData_SeperationNotFound")]
+        public void Test_SeperationNotFound_GetFunktion(List<Track> _testData)
+        {
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            condition.TooClose(_testData);
             Assert.IsFalse(condition.GetSeperation());
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        [Test, TestCaseSource("TestCasesData_SeperationNotFound")]
+        public void Test_SeperationNotFound_NoConflictAirplains(List<Track> _testData)
+        {
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            condition.TooClose(_testData);
 
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
@@ -236,9 +284,185 @@ namespace AirTrafficMonitoring_Tester
             }
         }
 
+        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
+        public void Test_SeperationFoundMultipleTimes_After10TimesStillOnlyOne(List<Track> _testData) //Time on sepration must not change
+        {
+            List<Track> _testDataBuf = _testData.ToList();
+            Console.WriteLine("Test running :");
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            DateTime start1 = new DateTime();
+            start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = new DateTime();
+            start2 = _testDataBuf[1].Timestamp;
+
+            Thread.Sleep(500);
+
+            condition.TooClose(_testDataBuf);
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < _testDataBuf.Count(); j++)
+                {
+                    _testDataBuf[j].X = (_testDataBuf[j].X + 1);
+                    _testDataBuf[j].Y = (_testDataBuf[j].Y + 1);
+                    _testDataBuf[j].Z = (_testDataBuf[j].Z + 1);
+                    _testDataBuf[j].Timestamp = DateTime.Now;
+                }
+
+                Thread.Sleep(100);
+            }
+
+            Assert.AreEqual(1, condition.GetConflictAirplain1().Count());
+            Assert.AreEqual(1, condition.GetConflictAirplain2().Count());
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
 
         [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
-        public void Test_SeperationFoundMultipleTimes(List<Track> _testData) //Time on sepration must not change
+        public void Test_SeperationFoundMultipleTimes_TimesGreaterThanInput_WhenTheSeprationFound(List<Track> _testData) //Time on sepration must not change
+        {
+            List<Track> _testDataBuf = _testData.ToList();
+            Console.WriteLine("Test running :");
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            DateTime start1 = new DateTime();
+            start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = new DateTime();
+            start2 = _testDataBuf[1].Timestamp;
+
+            Thread.Sleep(500);
+
+            condition.TooClose(_testDataBuf);
+            Assert.GreaterOrEqual(condition.GetConflictAirplain1()[0].Timestamp, start1);
+            Assert.GreaterOrEqual(condition.GetConflictAirplain2()[0].Timestamp, start2);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+
+        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
+        public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times(List<Track> _testData) //Time on sepration must not change
+        {
+            List<Track> _testDataBuf = _testData.ToList();
+            Console.WriteLine("Test running :");
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            DateTime start1 = new DateTime();
+            start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = new DateTime();
+            start2 = _testDataBuf[1].Timestamp;
+
+            Thread.Sleep(500);
+
+            condition.TooClose(_testDataBuf);
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < _testDataBuf.Count(); j++)
+                {
+                    _testDataBuf[j].X = (_testDataBuf[j].X + 1);
+                    _testDataBuf[j].Y = (_testDataBuf[j].Y + 1);
+                    _testDataBuf[j].Z = (_testDataBuf[j].Z + 1);
+                    _testDataBuf[j].Timestamp = DateTime.Now;
+                }
+
+                Assert.IsTrue(condition.TooClose(_testDataBuf));
+
+                Thread.Sleep(100);
+            }
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+
+        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
+        public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_RightAirplains(List<Track> _testData) //Time on sepration must not change
+        {
+            List<Track> _testDataBuf = _testData.ToList();
+            Console.WriteLine("Test running :");
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            DateTime start1 = new DateTime();
+            start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = new DateTime();
+            start2 = _testDataBuf[1].Timestamp;
+
+            Thread.Sleep(500);
+
+            condition.TooClose(_testDataBuf);
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < _testDataBuf.Count(); j++)
+                {
+                    _testDataBuf[j].X = (_testDataBuf[j].X + 1);
+                    _testDataBuf[j].Y = (_testDataBuf[j].Y + 1);
+                    _testDataBuf[j].Z = (_testDataBuf[j].Z + 1);
+                    _testDataBuf[j].Timestamp = DateTime.Now;
+                }
+
+                condition.TooClose(_testDataBuf);
+
+                Assert.AreEqual(_testDataBuf[0].Tag, condition.GetConflictAirplain1()[0].Tag);
+                Assert.AreEqual(_testDataBuf[1].Tag, condition.GetConflictAirplain2()[0].Tag);
+
+                Thread.Sleep(100);
+            }
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+
+        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
+        public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_ConflictPlainsHaveSameTime(List<Track> _testData) //Time on sepration must not change
+        {
+            List<Track> _testDataBuf = _testData.ToList();
+            Console.WriteLine("Test running :");
+            IFileWriter _fileWriter;
+            _fileWriter = new SeparationConditionLogger("AirplaneSeperations.txt");
+            Condition condition = new Condition(_fileWriter);
+
+            DateTime start1 = new DateTime();
+            start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = new DateTime();
+            start2 = _testDataBuf[1].Timestamp;
+
+            Thread.Sleep(500);
+
+            condition.TooClose(_testDataBuf);
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < _testDataBuf.Count(); j++)
+                {
+                    _testDataBuf[j].X = (_testDataBuf[j].X + 1);
+                    _testDataBuf[j].Y = (_testDataBuf[j].Y + 1);
+                    _testDataBuf[j].Z = (_testDataBuf[j].Z + 1);
+                    _testDataBuf[j].Timestamp = DateTime.Now;
+                }
+
+               condition.TooClose(_testDataBuf);
+
+                Assert.AreEqual(condition.GetConflictAirplain2()[0].Timestamp, condition.GetConflictAirplain1()[0].Timestamp);
+
+                Thread.Sleep(100);
+            }
+
+            File.Delete("AirplaneSeperations.txt");
+        }
+
+        [TestCaseSource("TestCasesData_SeperationFoundMultipleTimes")]
+        public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_ConflictTimeNotChanging(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
             Console.WriteLine("Test running :" );
@@ -253,10 +477,8 @@ namespace AirTrafficMonitoring_Tester
 
             Thread.Sleep(500);
 
-            Assert.IsTrue(condition.TooClose(_testDataBuf));
-            Assert.IsTrue(condition.GetSeperation());
-            Assert.GreaterOrEqual(condition.GetConflictAirplain1()[0].Timestamp, start1);
-            Assert.GreaterOrEqual(condition.GetConflictAirplain2()[0].Timestamp, start2);
+            condition.TooClose(_testDataBuf);
+
             start1 = condition.GetConflictAirplain1()[0].Timestamp;
             start2 = condition.GetConflictAirplain2()[0].Timestamp;
 
@@ -270,20 +492,13 @@ namespace AirTrafficMonitoring_Tester
                     _testDataBuf[j].Timestamp = DateTime.Now;
                 }
                 
-                Assert.IsTrue(condition.TooClose(_testDataBuf));
-                Assert.IsTrue(condition.GetSeperation());
+                condition.TooClose(_testDataBuf);
 
-                Assert.AreEqual(_testDataBuf[0].Tag, condition.GetConflictAirplain1()[0].Tag);
-                Assert.AreEqual(_testDataBuf[1].Tag, condition.GetConflictAirplain2()[0].Tag);
-                //Assert.AreEqual(start1, condition.GetConflictAirplain1()[0].Timestamp);
-                //Assert.AreEqual(start2, condition.GetConflictAirplain2()[0].Timestamp);
-                Assert.AreEqual(condition.GetConflictAirplain2()[0].Timestamp, condition.GetConflictAirplain1()[0].Timestamp);
+                Assert.AreEqual(start1, condition.GetConflictAirplain1()[0].Timestamp);
+                Assert.AreEqual(start2, condition.GetConflictAirplain2()[0].Timestamp);
 
                 Thread.Sleep(100);
             }
-
-            Assert.AreEqual(1, condition.GetConflictAirplain1().Count());
-            Assert.AreEqual(1, condition.GetConflictAirplain2().Count());
 
             File.Delete("AirplaneSeperations.txt");
         }
