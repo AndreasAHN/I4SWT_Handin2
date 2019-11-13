@@ -49,12 +49,7 @@ namespace AirTrafficMonitoring
                                 bool exist = false;
                                 for (int c = 0; c < bufConflictTrack1.Count(); c++)
                                 {
-                                    if ((conflictTrack1.Count() > c) && (((conflictTrack1[c].Tag == bufTrack.Tag) && (conflictTrack2[c].Tag == tracks[i].Tag)) || ((conflictTrack2[c].Tag == bufTrack.Tag) && (conflictTrack1[c].Tag == tracks[i].Tag))))
-                                    {
-                                        exist = true;
-                                        break;
-                                    }
-                                    else if (((bufConflictTrack1[c].Tag == bufTrack.Tag) || (bufConflictTrack2[c].Tag == tracks[i].Tag)))
+                                    if (((bufConflictTrack1[c].Tag == bufTrack.Tag) || (bufConflictTrack2[c].Tag == tracks[i].Tag)))
                                     {
                                         this.conflictTrack1.Add(bufConflictTrack1[c]);
                                         this.conflictTrack2.Add(bufConflictTrack2[c]);
@@ -63,10 +58,17 @@ namespace AirTrafficMonitoring
                                     }
                                 }
 
-                                if ((conflictTrack1.Count() != 0) && (((conflictTrack1[0].Tag == bufTrack.Tag) && (conflictTrack2[0].Tag == tracks[i].Tag)) || ((conflictTrack2[0].Tag == bufTrack.Tag) && (conflictTrack1[0].Tag == tracks[i].Tag))))
+                                if (conflictTrack1.Count() != 0)
                                 {
-                                    exist = true;
+                                    for (int d = 0; d < conflictTrack1.Count(); d++)
+                                    {
+                                        if (((conflictTrack1[d].Tag == bufTrack.Tag) && (conflictTrack2[d].Tag == tracks[i].Tag)) || ((conflictTrack2[d].Tag == bufTrack.Tag) && (conflictTrack1[d].Tag == tracks[i].Tag)))
+                                        {
+                                            exist = true;
+                                        }
+                                    }
                                 }
+                                
 
                                 if (exist == false)
                                 {
