@@ -414,8 +414,8 @@ namespace AirTrafficMonitoring_Tester
             List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
             List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
 
-            Assert.AreEqual(conflictAirplain1.Count(), 3);
-            Assert.AreEqual(conflictAirplain2.Count(), 3);
+            Assert.AreEqual(3, conflictAirplain1.Count());
+            Assert.AreEqual(3, conflictAirplain2.Count());
 
             File.Delete("AirplaneSeperations.txt");
         }
