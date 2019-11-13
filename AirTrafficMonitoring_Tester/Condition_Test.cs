@@ -387,5 +387,37 @@ namespace AirTrafficMonitoring_Tester
 
             File.Delete("AirplaneSeperations.txt");
         }
+
+
+
+        public static IEnumerable<TestCaseData> TestCasesData_SeperationFoundMultipleAirPlains
+        {
+            get
+            {
+                yield return new TestCaseData //Vertical = 14142,14 and Horizontal = 2500
+                (
+                    new List<Track>()
+                    {
+                        new Track { Tag = "GPJ740", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now },
+                        new Track { Tag = "QRM275", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now },
+                        new Track { Tag = "ONC788", X = 2500, Y = 2500, Z = 2500, Timestamp = DateTime.Now }
+            }
+                ).SetName("Test_SeperationFoundMultipleTimes");
+            }
+        }
+
+        [Test, TestCaseSource("TestCasesData_SeperationFoundMultipleAirPlains")]
+        public void Test_SeperationFound_MultipleAirplains(List<Track> _testData)
+        {
+            condition.TooClose(_testData);
+
+            List<Track> conflictAirplain1 = condition.GetConflictAirplain1();
+            List<Track> conflictAirplain2 = condition.GetConflictAirplain2();
+
+            Assert.AreEqual(conflictAirplain1.Count(), 3);
+            Assert.AreEqual(conflictAirplain2.Count(), 3);
+
+            File.Delete("AirplaneSeperations.txt");
+        }
     }
 }
