@@ -36,10 +36,10 @@ namespace AirTrafficMonitoring_Tester
 
 
         [Test]
-        public void Test_OutOfBounds()
-        //et fly der ikke bevæger sig inden for Airspace´s rammer, kommer ikke ind
+        public void Test_OutOfBounds_X()
+        //et fly der ikke bevæger sig inden for Airspace´s rammer kommer ikke ind (X)
         {
-            _trackData.Add(new Track { Tag = "AAA111", X = 79999, Y = 79999, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "AAA111", X = 79999, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "CCC333", X = 80001, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
 
@@ -54,9 +54,31 @@ namespace AirTrafficMonitoring_Tester
              */
         }
 
+        //addition
         [Test]
-        public void Test_InBounds()
-        //et fly der bevæger sig inden for Airspace´s rammer, kommer ind
+        public void Test_OutOfBounds_Y()
+        //et fly der ikke bevæger sig inden for Airspace´s rammer kommer ikke ind (Y)
+        {
+            _trackData.Add(new Track { Tag = "AAA111", X = 80000, Y = 79999, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 80000, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
+
+            _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
+
+            Assert.AreEqual(2, _uut.GetTracks().Count);
+
+
+            /*
+             Her forventes der 3 fly, men der kommer 0 ind, da alle tre fly har et track, der overstiger de grænser, 
+             der er sat for det overvågede luftrummet            
+             */
+        }
+
+        
+
+        [Test]
+        public void Test_InBounds_X()
+        //et fly der bevæger sig inden for Airspace´s rammer kommer ind
         {
             _trackData.Add(new Track { Tag = "AAA111", X = 70000, Y = 70000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "BBB222", X = 70000, Y = 70000, Z = 8000, Timestamp = DateTime.Now });
@@ -71,6 +93,37 @@ namespace AirTrafficMonitoring_Tester
              holder sig inden fir luftrummets grænser
              */
         }
+
+        //addition
+
+        [Test]
+        public void Test_InBounds_Y()
+        //et fly der bevæger sig inden for Airspace´s rammer kommer ind
+        {
+            _trackData.Add(new Track { Tag = "AAA111", X = 70000, Y = 70000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 70000, Y = 70000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 70000, Y = 70000, Z = 8000, Timestamp = DateTime.Now });
+
+
+            _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
+            Assert.AreEqual(3, _uut.GetTracks().Count);
+
+            /*
+             Her forventes 3 fly at komme ind det overvågede luftrummet, da alle tre fly har et track, der 
+             holder sig inden fir luftrummets grænser
+             */
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
         [Test]
