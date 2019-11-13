@@ -63,7 +63,7 @@ namespace AirTrafficMonitoring
                                     }
                                 }
 
-                                if ((conflictTrack1.Count() != 0) && ((!(conflictTrack1[0].Tag == bufTrack.Tag) && !(conflictTrack2[0].Tag == tracks[i].Tag) || (!(conflictTrack2[0].Tag == bufTrack.Tag) && !(conflictTrack1[0].Tag == tracks[i].Tag)))))
+                                if ((conflictTrack1.Count() != 0) && (((conflictTrack1[0].Tag == bufTrack.Tag) && (conflictTrack2[0].Tag == tracks[i].Tag)) || ((conflictTrack2[0].Tag == bufTrack.Tag) && (conflictTrack1[0].Tag == tracks[i].Tag))))
                                 {
                                     exist = true;
                                 }
