@@ -269,12 +269,6 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_After10TimesStillOnlyOne(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :");
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
 
             Thread.Sleep(500);
 
@@ -304,12 +298,6 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_TimesGreaterThanInput_WhenTheSeprationFound(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :");
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
 
             Thread.Sleep(500);
 
@@ -325,12 +313,6 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :");
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
 
             for (int i = 0; i < 10; i++)
             {
@@ -355,12 +337,6 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_RightAirplains(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :");
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
 
             for (int i = 0; i < 10; i++)
             {
@@ -388,12 +364,6 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_ConflictPlainsHaveSameTime(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :");
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
 
             for (int i = 0; i < 10; i++)
             {
@@ -419,19 +389,11 @@ namespace AirTrafficMonitoring_Tester
         public void Test_SeperationFoundMultipleTimes_FoundSeperation10Times_ConflictTimeNotChanging(List<Track> _testData) //Time on sepration must not change
         {
             List<Track> _testDataBuf = _testData.ToList();
-            Console.WriteLine("Test running :" );
-
-            DateTime start1 = new DateTime();
-            start1 = _testDataBuf[0].Timestamp;
-            DateTime start2 = new DateTime();
-            start2 = _testDataBuf[1].Timestamp;
-
-            Thread.Sleep(500);
 
             condition.TooClose(_testDataBuf);
 
-            start1 = condition.GetConflictAirplain1()[0].Timestamp;
-            start2 = condition.GetConflictAirplain2()[0].Timestamp;
+            DateTime start1 = condition.GetConflictAirplain1()[0].Timestamp;
+            DateTime start2 = condition.GetConflictAirplain2()[0].Timestamp;
 
             for (int i = 0; i < 10; i++)
             {
