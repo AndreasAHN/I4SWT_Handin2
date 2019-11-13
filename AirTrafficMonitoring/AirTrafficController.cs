@@ -39,13 +39,9 @@ namespace AirTrafficMonitoring
             _screen = new Screen();
 
 
-            while (runner)
-            {
-                Thread.Sleep(1000);
-            }
         }
 
-        void air_ThresholdReached(object sender, EventArgs e)//New airplains event
+        public void air_ThresholdReached(object sender, EventArgs e)//New airplains event
         {
             _screen.printTracks(_airspace.GetTracks());
             _condition.TooClose(_airspace.GetTracks());
