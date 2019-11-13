@@ -4,11 +4,11 @@ using System.Text;
 
 namespace AirTrafficMonitoring
 {
-    public class SeperationConditionLogger : IFileWriter
+    public class SeparationConditionLogger : IFileWriter
     {
         private readonly string _filename;
 
-        public SeperationConditionLogger(string filename)
+        public SeparationConditionLogger(string filename)
         {
             _filename = filename;
         }

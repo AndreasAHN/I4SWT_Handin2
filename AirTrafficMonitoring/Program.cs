@@ -11,52 +11,14 @@ namespace AirTrafficMonitoring
     class Program 
     //Main er vores AirTrafficController, da denne ikke har fået sin egen klasse
     {
-        private static ICondition _condition;
-        private static IFileWriter _fileWriter;
-        private static IAirspace _airspace;
-        private static ITrackCalculator _trackCalculator;
-        private static IScreen _screen;
-
-
-
-        public static bool runner = true; //Kan sætte til false fra resten af programmet, for at standse koden.
         static void Main(string[] args)
         {
-            // TransponderReceiverClient
-            var transponderDataReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            var transponderReceiverClient = new TransponderReceiverClient(transponderDataReceiver);
-
-            // Condition
-            _fileWriter = new SeperationConditionLogger("AirplaneSeperations.txt");
-            _condition = new Condition(_fileWriter);
-
-            // Airspace
-            _trackCalculator = new TrackCalculator();
-            _airspace = new Airspace(_trackCalculator);
-            transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
-            _airspace.AirSpaceChanged += air_ThresholdReached;
-
-            // Screen
-            _screen = new Screen();
+            AirTrafficController airTrafficController = new  AirTrafficController();
 
 
-            while (runner)
+            while (true)
             {
                 Thread.Sleep(1000);
-            }
-        }
-
-        static void air_ThresholdReached(object sender, EventArgs e)//New airplains event
-        {
-            _screen.printTracks(_airspace.GetTracks());
-            _condition.TooClose(_airspace.GetTracks());
-
-            if (_condition.GetSeperation())
-            {
-                for (int x = 0; x < _condition.GetConflictAirplain1().Count(); x++)
-                {
-                    _screen.printConflict(_condition.GetConflictAirplain1()[x], _condition.GetConflictAirplain2()[x]);
-                }
             }
         }
     }

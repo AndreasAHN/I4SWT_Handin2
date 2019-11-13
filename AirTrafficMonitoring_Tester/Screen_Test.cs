@@ -22,14 +22,26 @@ namespace AirTrafficMonitoring_Tester
         }
 
 
-        [Test]
-        public void Test_PrintTracks()
+        public static IEnumerable<TestCaseData> TestCasesData_PrintTracks
         {
-            List<Track> _testData = new List<Track>();
-            _testData.Add(new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
+            get
+            {
+                yield return new TestCaseData //Vertical = 14142,14 and Horizontal = 2500
+                (
+                    new List<Track>()
+                    {
+                        new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now },
+                        new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now },
+                        new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now }
+                    }
+                ).SetName("Test_PrintTracks");
+            }
+        }
 
+
+        [TestCaseSource("TestCasesData_PrintTracks")]
+        public void Test_PrintTracks(List<Track> _testData)
+        {
             var consolReader = new Process();
             consolReader.StartInfo.UseShellExecute = false;
             consolReader.StartInfo.RedirectStandardOutput = true;
@@ -60,14 +72,11 @@ namespace AirTrafficMonitoring_Tester
             Assert.IsTrue(expectedResult.Contains(result));
         }
 
-        [Test]
-        public void Test_PrintTracksOutput()
-        {
-            List<Track> _testData = new List<Track>();
-            _testData.Add(new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
-            _testData.Add(new Track { Tag = "ONC788", X = 28636, Y = 26560, Z = 500, Timestamp = DateTime.Now });
 
+
+        [TestCaseSource("TestCasesData_PrintTracks")]
+        public void Test_PrintTracksOutput(List<Track> _testData)
+        {
             Screen screen = new Screen();
             screen.printTracks(_testData);
 
@@ -86,12 +95,27 @@ namespace AirTrafficMonitoring_Tester
             }
         }
 
-        [Test]
-        public void Test_PrintConflict()
-        {
-            Track _testData1 = (new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
-            Track _testData2 = (new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
 
+
+        public static IEnumerable<TestCaseData> TestCasesData_PrintConflict
+        {
+            get
+            {
+                yield return new TestCaseData //Vertical = 14142,14 and Horizontal = 2500
+                (
+                    new List<Track>()
+                    {
+                        new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now },
+                        new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now }
+                    }
+                ).SetName("Test_PrintConflict");
+            }
+        }
+
+
+        [TestCaseSource("TestCasesData_PrintConflict")]
+        public void Test_PrintConflict(List<Track> _testData)
+        {
             var consolReader = new Process();
             consolReader.StartInfo.UseShellExecute = false;
             consolReader.StartInfo.RedirectStandardOutput = true;
@@ -99,12 +123,12 @@ namespace AirTrafficMonitoring_Tester
             consolReader.Start();
 
             Screen screen = new Screen();
-            screen.printConflict(_testData1, _testData2);
+            screen.printConflict(_testData[0], _testData[1]);
 
             string result = consolReader.StandardOutput.ReadToEnd();
             consolReader.WaitForExit();
 
-            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp;
+            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData[0].Tag + " and " + _testData[1].Tag + ", at: " + _testData[0].Timestamp;
 
             Console.WriteLine("\n Orginale oven over:");
 
@@ -118,16 +142,13 @@ namespace AirTrafficMonitoring_Tester
         }
 
 
-        [Test]
-        public void Test_PrintConflictOutput()
+        [TestCaseSource("TestCasesData_PrintConflict")]
+        public void Test_PrintConflictOutput(List<Track> _testData)
         {
-            Track _testData1 = (new Track { Tag = "GPJ740", X = 46155, Y = 16263, Z = 3500, Timestamp = DateTime.Now });
-            Track _testData2 = (new Track { Tag = "QRM275", X = 31268, Y = 57982, Z = 600, Timestamp = DateTime.Now });
-
             Screen screen = new Screen();
-            screen.printConflict(_testData1, _testData2);
+            screen.printConflict(_testData[0], _testData[1]);
 
-            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData1.Tag + " and " + _testData2.Tag + ", at: " + _testData1.Timestamp;
+            string expectedResult = "\n" + "!WARNING-SEPERATION! " + _testData[0].Tag + " and " + _testData[1].Tag + ", at: " + _testData[0].Timestamp;
             List<string> buf = screen.GetprintConflictOutput().ToList();
             string output = buf[0];
             Assert.AreEqual(expectedResult, output);
