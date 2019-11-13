@@ -299,6 +299,9 @@ namespace AirTrafficMonitoring_Tester
         {
             List<Track> _testDataBuf = _testData.ToList();
 
+            DateTime start1 = _testDataBuf[0].Timestamp;
+            DateTime start2 = _testDataBuf[1].Timestamp;
+
             Thread.Sleep(500);
 
             condition.TooClose(_testDataBuf);
