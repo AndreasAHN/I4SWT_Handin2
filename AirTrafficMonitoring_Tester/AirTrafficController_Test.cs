@@ -18,7 +18,6 @@ namespace AirTrafficMonitoring_Tester
         private IAirspace _fakeAirspace;
         private AirTrafficController _uut;
         private List<Track> _trackData = new List<Track>();
-        private ITransponderReceiverClient _fakeTransponderReceiverClient;
 
 
 
@@ -28,12 +27,8 @@ namespace AirTrafficMonitoring_Tester
         public void SetUp()
         {
             _fakeAirspace = new Airspace(new TrackCalculator());
-            _fakeTransponderReceiverClient = Substitute.For<ITransponderReceiverClient>();
 
             _uut = new AirTrafficController();
-
-            _fakeTransponderReceiverClient.DataReadyEvent += _fakeAirspace.HandleDataReadyEvent;
-
             _fakeAirspace.AirspaceChangedEvent += _uut.air_ThresholdReached;
 
         }
@@ -46,12 +41,11 @@ namespace AirTrafficMonitoring_Tester
             _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "CCC333", X = 80001, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
 
-            _fakeTransponderReceiverClient.DataReadyEvent += Raise.EventWith(this, new DataReceivedEventArgs(_trackData));
-
 
             var wasCalled = false;
             _fakeAirspace.AirspaceChangedEvent += (o, e) => wasCalled = true;
 
+            _fakeAirspace.AirspaceChangedEvent += Raise.EventWith(new AirspaceChangedEventArgs {Tracks = _trackData});
 
             Assert.IsTrue(wasCalled);
         }
