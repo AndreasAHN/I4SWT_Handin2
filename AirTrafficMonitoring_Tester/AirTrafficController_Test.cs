@@ -26,10 +26,7 @@ namespace AirTrafficMonitoring_Tester
         [SetUp]
         public void SetUp()
         {
-            _fakeAirspace = new Airspace(new TrackCalculator());
-
             _uut = new AirTrafficController();
-
         }
 
         [Test]
@@ -40,7 +37,7 @@ namespace AirTrafficMonitoring_Tester
             _trackData.Add(new Track { Tag = "BBB222", X = 5000, Y = 5000, Z = 8000, Timestamp = DateTime.Now });
             _trackData.Add(new Track { Tag = "CCC333", X = 5000, Y = 5000, Z = 8000, Timestamp = DateTime.Now });
 
-            _fakeAirspace.AirspaceChangedEvent += Raise.EventWith(new AirspaceChangedEventArgs {Tracks = _trackData});
+            _uut.air_ThresholdReached(this, new AirspaceChangedEventArgs{Tracks = _trackData});
         }
     }
 }
