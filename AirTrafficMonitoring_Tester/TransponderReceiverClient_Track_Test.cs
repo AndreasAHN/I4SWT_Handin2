@@ -23,11 +23,12 @@ namespace AirTrafficMonitoring_Tester
             _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
 
             _uut = new TransponderReceiverClient(_fakeTransponderReceiver);
-            _testData = new List<string>();
-
-            _testData.Add("TWM378;88244;50602;10200;20191024005234115");
-            _testData.Add("GVC241;37594;77966;10900;20191024005308490");
-            _testData.Add("WIA512;17357;24364;2100;20191024005318802");
+            _testData = new List<string>
+            {
+                "TWM378;88244;50602;10200;20191024005234115",
+                "GVC241;37594;77966;10900;20191024005308490",
+                "WIA512;17357;24364;2100;20191024005318802"
+            };
 
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(_testData));

@@ -11,6 +11,7 @@ namespace AirTrafficMonitoring
     {
         private List<Track> tracks;
         private ITrackCalculator _trackCalculator;
+        public event EventHandler<AirspaceChangedEventArgs> AirspaceChangedEvent;
 
         public Airspace(ITrackCalculator trackCalculator)
         {
@@ -18,13 +19,10 @@ namespace AirTrafficMonitoring
             _trackCalculator = trackCalculator;
         }
 
-        public event EventHandler AirSpaceChanged;
-        protected virtual void AirTrafficController(EventArgs e)
+        protected virtual void AirTrafficController(AirspaceChangedEventArgs e)
         {
-            EventHandler handler = AirSpaceChanged;
-            handler?.Invoke(this, e);
+            AirspaceChangedEvent?.Invoke(this, e);
         }
-
 
 
         public void HandleDataReadyEvent(object sender, DataReceivedEventArgs e)
@@ -45,7 +43,7 @@ namespace AirTrafficMonitoring
 
                 tracks = _trackCalculator.TrackCalculate(tracks).ToList();
 
-                AirTrafficController(EventArgs.Empty);
+                AirTrafficController(new AirspaceChangedEventArgs{ Tracks = tracks });
             }
         }
 

@@ -14,6 +14,6 @@ namespace AirTrafficMonitoring
 
         void clearTracks();
 
-        event EventHandler AirSpaceChanged;
+        event EventHandler<AirspaceChangedEventArgs> AirspaceChangedEvent;
     }
 }

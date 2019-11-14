@@ -34,7 +34,7 @@ namespace AirTrafficMonitoring_Tester
 
             _fakeTransponderReceiverClient.DataReadyEvent += _fakeAirspace.HandleDataReadyEvent;
 
-            _fakeAirspace.AirSpaceChanged += _uut.air_ThresholdReached;
+            _fakeAirspace.AirspaceChangedEvent += _uut.air_ThresholdReached;
 
         }
 
@@ -50,7 +50,7 @@ namespace AirTrafficMonitoring_Tester
 
 
             var wasCalled = false;
-            _fakeAirspace.AirSpaceChanged += (o, e) => wasCalled = true;
+            _fakeAirspace.AirspaceChangedEvent += (o, e) => wasCalled = true;
 
 
             Assert.IsTrue(wasCalled);

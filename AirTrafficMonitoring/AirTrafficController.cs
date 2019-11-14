@@ -33,7 +33,7 @@ namespace AirTrafficMonitoring
             _trackCalculator = new TrackCalculator();
             _airspace = new Airspace(_trackCalculator);
             transponderReceiverClient.DataReadyEvent += _airspace.HandleDataReadyEvent;
-            _airspace.AirSpaceChanged += air_ThresholdReached;
+            _airspace.AirspaceChangedEvent += air_ThresholdReached;
 
             // Screen
             _screen = new Screen();
@@ -41,10 +41,10 @@ namespace AirTrafficMonitoring
 
         }
 
-        public void air_ThresholdReached(object sender, EventArgs e)//New airplains event
+        public void air_ThresholdReached(object sender, AirspaceChangedEventArgs e)
         {
-            _screen.printTracks(_airspace.GetTracks());
-            _condition.TooClose(_airspace.GetTracks());
+            _screen.printTracks(e.Tracks);
+            _condition.TooClose(e.Tracks);
 
             if (_condition.GetSeperation())
             {
