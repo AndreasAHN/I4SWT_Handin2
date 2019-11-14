@@ -29,7 +29,6 @@ namespace AirTrafficMonitoring_Tester
             _fakeAirspace = new Airspace(new TrackCalculator());
 
             _uut = new AirTrafficController();
-            _fakeAirspace.AirspaceChangedEvent += _uut.air_ThresholdReached;
 
         }
 
@@ -37,14 +36,11 @@ namespace AirTrafficMonitoring_Tester
         public void EventOccured()
         //tests if an event from Airspace is received
         {
-            _trackData.Add(new Track { Tag = "AAA111", X = 79999, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "BBB222", X = 80000, Y = 80000, Z = 8000, Timestamp = DateTime.Now });
-            _trackData.Add(new Track { Tag = "CCC333", X = 80001, Y = 80001, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "AAA111", X = 5000, Y = 5000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "BBB222", X = 5000, Y = 5000, Z = 8000, Timestamp = DateTime.Now });
+            _trackData.Add(new Track { Tag = "CCC333", X = 5000, Y = 5000, Z = 8000, Timestamp = DateTime.Now });
 
-            _fakeAirspace.AirspaceChangedEvent += Raise.EventWith(new AirspaceChangedEventArgs { Tracks = _trackData });
-
-
-            Assert.AreEqual(1, 1);
+            _fakeAirspace.AirspaceChangedEvent += Raise.EventWith(new AirspaceChangedEventArgs {Tracks = _trackData});
         }
     }
 }
